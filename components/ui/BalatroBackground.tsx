@@ -18,7 +18,7 @@ interface Card {
 export default function BalatroBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const cardsRef = useRef<Card[]>([]);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const canvas = canvasRef.current;
