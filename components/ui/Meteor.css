@@ -1,0 +1,38 @@
+.meteor {
+  position: absolute;
+  height: 2px;
+  width: 2px;
+  rotate: 45deg;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.meteor::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  height: 1px;
+  width: 50px;
+  transform: translateY(-50%);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.8), transparent);
+}
+
+@keyframes meteor {
+  0% {
+    transform: rotate(215deg) translateX(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(215deg) translateX(-500px);
+    opacity: 0;
+  }
+}
+
+.meteor {
+  animation: meteor 5s linear infinite;
+}
+

@@ -1,0 +1,30 @@
+.blur-text-word {
+  opacity: 0;
+  filter: blur(10px);
+  animation: blurTextIn 0.6s ease-out forwards;
+}
+
+@keyframes blurTextIn {
+  to {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translate(0, 0);
+  }
+}
+
+.blur-text-word[data-direction="top"] {
+  transform: translateY(-20px);
+}
+
+.blur-text-word[data-direction="bottom"] {
+  transform: translateY(20px);
+}
+
+.blur-text-word[data-direction="left"] {
+  transform: translateX(-20px);
+}
+
+.blur-text-word[data-direction="right"] {
+  transform: translateX(20px);
+}
+
