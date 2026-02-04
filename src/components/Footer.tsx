@@ -1,7 +1,104 @@
 import { Linkedin, Twitter, Mail, Phone, MessageCircle, Send } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export const Footer = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const currentYear = new Date().getFullYear();
+
+  // Service IDs in order - must match the order in Services.tsx
+  const serviceIds = [
+    'civil-transportation',
+    'ada-curb-ramp',
+    'traffic-control',
+    'swppp-erosion',
+    'plan-cleanup',
+  ];
+
+  const scrollToService = (href: string) => {
+    const serviceId = href.replace('#', '');
+    const serviceIndex = serviceIds.indexOf(serviceId);
+
+    if (serviceIndex === -1) return;
+
+    const isOnHomePage = location.pathname === '/';
+
+    if (!isOnHomePage) {
+      // Navigate to home page first, then scroll after a delay
+      navigate('/');
+      // First, scroll to approximate position instantly (no animation) to avoid jarring jump
+      setTimeout(() => {
+        const servicesSection = document.getElementById('services');
+        if (!servicesSection) return;
+
+        const sectionTop = servicesSection.offsetTop;
+        const viewportHeight = window.innerHeight;
+        const targetScroll = sectionTop + (serviceIndex * viewportHeight);
+
+        // Instant scroll first
+        window.scrollTo({
+          top: targetScroll - 100,
+          behavior: 'instant'
+        });
+
+        // Then smooth scroll to exact position
+        setTimeout(() => {
+          window.scrollTo({
+            top: targetScroll,
+            behavior: 'smooth'
+          });
+        }, 50);
+      }, 400);
+    } else {
+      // Already on home page, scroll directly
+      const servicesSection = document.getElementById('services');
+      if (!servicesSection) return;
+
+      const sectionTop = servicesSection.offsetTop;
+      const viewportHeight = window.innerHeight;
+      const targetScroll = sectionTop + (serviceIndex * viewportHeight);
+
+      window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  // General scroll function for other sections (About, How It Works, etc.)
+  const scrollToSection = (href: string) => {
+    if (href === '#') return; // Skip placeholder links
+
+    const sectionId = href.replace('#', '');
+    const isOnHomePage = location.pathname === '/';
+
+    if (!isOnHomePage) {
+      navigate('/');
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          window.scrollTo({
+            top: section.offsetTop - 80,
+            behavior: 'instant'
+          });
+          setTimeout(() => {
+            window.scrollTo({
+              top: section.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }, 50);
+        }
+      }, 400);
+    } else {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        window.scrollTo({
+          top: section.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      }
+    }
+  };
 
   return (
     <footer className="border-t border-primary/20 dark:border-border/50 bg-white dark:bg-background text-foreground dark:text-foreground">
@@ -10,9 +107,9 @@ export const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <a href="#" className="flex items-center gap-2 mb-4">
-              <img 
-                src="/pave_logo.jpg" 
-                alt="pavepathdesign" 
+              <img
+                src="/pave_logo.jpg"
+                alt="pavepathdesign"
                 className="h-10 w-auto object-contain"
               />
               <span className="font-display font-bold text-xl text-foreground dark:text-foreground">
@@ -20,31 +117,31 @@ export const Footer = () => {
               </span>
             </a>
             <p className="text-foreground/80 dark:text-foreground/80 text-sm mb-6">
-              Engineering design services built for speed. 
+              Engineering design services built for speed.
               From urgent redlines to full project support.
             </p>
             <div className="flex gap-4">
-              <a 
-                href="https://www.linkedin.com/company/pavepathdesign/posts/?feedView=all" 
-                target="_blank" 
+              <a
+                href="https://www.linkedin.com/company/pavepathdesign/posts/?feedView=all"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg bg-foreground/10 dark:bg-card/30 flex items-center justify-center hover:bg-secondary transition-colors text-foreground dark:text-foreground hover:text-secondary-foreground dark:hover:text-foreground"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
-              <a 
-                href="https://x.com/PavePathdesign" 
-                target="_blank" 
+              <a
+                href="https://x.com/PavePathdesign"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg bg-foreground/10 dark:bg-card/30 flex items-center justify-center hover:bg-secondary transition-colors text-foreground dark:text-foreground hover:text-secondary-foreground dark:hover:text-foreground"
                 aria-label="X (Twitter)"
               >
                 <Twitter className="w-4 h-4" />
               </a>
-              <a 
-                href="https://t.me/PavePathdesign" 
-                target="_blank" 
+              <a
+                href="https://t.me/PavePathdesign"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg bg-foreground/10 dark:bg-card/30 flex items-center justify-center hover:bg-secondary transition-colors text-foreground dark:text-foreground hover:text-secondary-foreground dark:hover:text-foreground"
                 aria-label="Telegram"
@@ -58,10 +155,20 @@ export const Footer = () => {
           <div>
             <h4 className="font-display font-semibold mb-4 text-foreground dark:text-foreground">Services</h4>
             <ul className="space-y-3">
-              {['Drafting & Design', '3D Modeling & BIM', 'Redline Processing', 'Engineering Support'].map((item) => (
-                <li key={item}>
-                  <a href="#services" className="text-foreground/70 dark:text-foreground/70 hover:text-secondary transition-colors text-sm">
-                    {item}
+              {[
+                { label: 'Civil & Transportation Drafting', href: '#civil-transportation' },
+                { label: 'ADA Curb Ramp Drafting', href: '#ada-curb-ramp' },
+                { label: 'Traffic Control Plan Drafting (TCP)', href: '#traffic-control' },
+                { label: 'SWPPP & Erosion Control Drafting', href: '#swppp-erosion' },
+                { label: 'Plan Set Cleanup & Organization', href: '#plan-cleanup' },
+              ].map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    onClick={(e) => { e.preventDefault(); scrollToService(item.href); }}
+                    className="text-foreground/70 dark:text-foreground/70 hover:text-secondary transition-colors text-sm"
+                  >
+                    {item.label}
                   </a>
                 </li>
               ))}
@@ -75,11 +182,13 @@ export const Footer = () => {
               {[
                 { label: 'About Us', href: '#about' },
                 { label: 'How It Works', href: '#how-it-works' },
-                { label: 'Case Studies', href: '#' },
-                { label: 'Careers', href: '#' },
               ].map((item) => (
                 <li key={item.label}>
-                  <a href={item.href} className="text-foreground/70 dark:text-foreground/70 hover:text-secondary transition-colors text-sm">
+                  <a
+                    href={item.href}
+                    onClick={(e) => { e.preventDefault(); scrollToSection(item.href); }}
+                    className="text-foreground/70 dark:text-foreground/70 hover:text-secondary transition-colors text-sm"
+                  >
                     {item.label}
                   </a>
                 </li>
@@ -99,12 +208,12 @@ export const Footer = () => {
               </li>
               <li className="flex items-center gap-3 text-sm text-foreground/80 dark:text-foreground/80">
                 <Phone className="w-4 h-4 text-secondary flex-shrink-0" />
-                <a href="tel:+16503092685" className="hover:text-secondary transition-colors">
+                <a href="https://wa.me/16503092685" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
                   +1 650 309 2685
                 </a>
-                <a 
-                  href="https://wa.me/16503092685" 
-                  target="_blank" 
+                <a
+                  href="https://wa.me/16503092685"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="ml-2 hover:scale-110 transition-transform"
                   aria-label="WhatsApp"
@@ -120,14 +229,7 @@ export const Footer = () => {
           <p className="text-sm text-black dark:text-foreground/70">
             © {currentYear} pavepathdesign. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            <a href="#" className="text-sm text-black dark:text-foreground/70 hover:text-secondary transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="text-sm text-black dark:text-foreground/70 hover:text-secondary transition-colors">
-              Terms of Service
-            </a>
-          </div>
+
         </div>
       </div>
     </footer>

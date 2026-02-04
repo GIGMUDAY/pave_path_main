@@ -140,6 +140,16 @@
   }
 }
 
+/* Ensure rich-text content inherits theme colors (light/dark) */
+@layer base {
+  .prose-content {
+    color: hsl(var(--foreground));
+  }
+  .prose-content :where(p, li, strong, em, span, h1, h2, h3, h4, h5, h6, a) {
+    color: inherit !important;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;

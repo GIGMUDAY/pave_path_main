@@ -11,7 +11,6 @@ interface ContentItem {
   description: string;
   content: React.ReactNode;
   icon?: React.ComponentType<{ className?: string }>;
-  number?: string;
   image?: string;
   features?: string[];
   note?: string;
@@ -59,11 +58,6 @@ const ScrollTextItem = ({ item, index, totalItems, scrollYProgress }: ScrollItem
       style={{ opacity: textOpacity, y: textY }}
     >
       <div className="flex items-center gap-3 sm:gap-4 mb-3">
-        {item.number && (
-          <span className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-primary/20">
-            {item.number}
-          </span>
-        )}
         {Icon && (
           <div className="w-10 h-10 sm:w-12 sm:h-14 rounded-xl bg-secondary/10 flex items-center justify-center border border-secondary/20 flex-shrink-0">
             <Icon className="w-5 h-5 sm:w-6 sm:h-7 text-secondary" strokeWidth={1.5} />
@@ -196,11 +190,6 @@ export const StickyScroll = ({ content, contentClassName }: StickyScrollProps) =
               {/* Content */}
               <div className="p-6 sm:p-8">
                 <div className="flex items-center gap-3 sm:gap-4 mb-4">
-                  {item.number && (
-                    <span className="font-display text-2xl sm:text-3xl font-bold text-primary/20">
-                      {item.number}
-                    </span>
-                  )}
                   {Icon && (
                     <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-secondary/10 flex items-center justify-center border border-secondary/20 flex-shrink-0">
                       <Icon className="w-6 h-6 sm:w-7 sm:h-7 text-secondary" strokeWidth={1.5} />

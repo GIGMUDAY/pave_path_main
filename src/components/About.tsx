@@ -3,9 +3,9 @@ import { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 
 const stats = [
-  { value: '15+', label: 'Years Experience' },
-  { value: '500+', label: 'Projects Delivered' },
-  { value: '98%', label: 'On-Time Delivery' },
+  { value: '5+', label: 'Years Experience' },
+  { value: '50+', label: 'Projects Delivered' },
+  { value: '99.8%', label: 'On-Time Delivery' },
   { value: '50+', label: 'Engineering Experts' },
 ];
 

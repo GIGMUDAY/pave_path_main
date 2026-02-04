@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Login Test</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 420px; margin: 40px auto; padding: 0 16px; }
+    label { display: block; margin-top: 12px; }
+    input { width: 100%; padding: 8px; margin-top: 4px; }
+    button { margin-top: 16px; padding: 10px 14px; }
+    pre { background: #f5f5f5; padding: 10px; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <h1>Login Test</h1>
+  <form id="login-form">
+    <label>
+      Email
+      <input type="email" name="email" value="berekettadesse1244@gmail.com" required />
+    </label>
+    <label>
+      Password
+      <input type="password" name="password" value="12345678" required />
+    </label>
+    <button type="submit">Log in</button>
+  </form>
+
+  <h3>Response</h3>
+  <pre id="output">Awaiting request...</pre>
+
+  <script>
+    const form = document.getElementById('login-form');
+    const output = document.getElementById('output');
+    const API_BASE = 'http://localhost:8080/api/auth/login';
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const email = data.get('email');
+      const password = data.get('password');
+      output.textContent = 'Loading...';
+      try {
+        const res = await fetch(API_BASE, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        });
+        const body = await res.json();
+        output.textContent = JSON.stringify({ status: res.status, body }, null, 2);
+        if (body.token) {
+          localStorage.setItem('auth_token', body.token);
+        }
+      } catch (err) {
+        output.textContent = String(err);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1067 @@
+<html lang="en" class="scroll-smooth dark"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mehare Christian Television Channel | መሐረ ክርስቲያን ቴሌቪዥን ጣቢያ</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Noto+Sans+Ethiopic:wght@300;400;600&amp;display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans Ethiopic', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f4f8',
+                            100: '#d9e2ec',
+                            200: '#bcccdc',
+                            300: '#9fb3c8',
+                            400: '#829ab1',
+                            500: '#627d98',
+                            600: '#486581',
+                            700: '#334e68',
+                            800: '#243b53',
+                            900: '#102a43',
+                            950: '#0a1c2e',
+                            gold: '#d69e2e', 
+                            goldLight: '#fefcbf',
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'slide-in': 'slideIn 0.3s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideIn: {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-feature-settings: "cv11", "ss01";
+            -webkit-font-smoothing: antialiased;
+        }
+        .page-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .page-section.active {
+            display: block;
+            opacity: 1;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+        }
+        html.dark ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        html.dark ::-webkit-scrollbar-thumb {
+            background: #334155; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        html.dark ::-webkit-scrollbar-thumb:hover {
+            background: #475569; 
+        }
+
+        /* Hero Slider Styles */
+        .hero-slide {
+            opacity: 0;
+            transform: scale(1.05);
+            transition: opacity 1s ease-in-out, transform 6s ease-out;
+            position: absolute;
+            inset: 0;
+        }
+        .hero-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .slide-indicator {
+            transition: all 0.3s ease;
+        }
+        .slide-indicator.active {
+            width: 2rem;
+        }
+
+        /* Sidebar Styles */
+        .sidebar-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .sidebar {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .sidebar.active {
+            transform: translateX(0);
+        }
+
+        /* Glass/Blur Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        html.dark .glass {
+            background: rgba(15, 23, 42, 0.7);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        html.dark .glass-card {
+            background: rgba(30, 41, 59, 0.6);
+        }
+        .glass-subtle {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        html.dark .glass-subtle {
+            background: rgba(30, 41, 59, 0.5);
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-950 font-sans selection:bg-brand-gold selection:text-white transition-colors duration-300">
+
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay" class="sidebar-overlay fixed inset-0 bg-black/50 backdrop-blur-sm z-50" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="sidebar fixed top-0 left-0 h-full w-72 glass z-50 shadow-2xl flex flex-col border-r border-white/20 dark:border-slate-700/50">
+        <!-- Sidebar Header -->
+        <div class="flex items-center justify-between p-6 border-b border-slate-200/50 dark:border-slate-700/50">
+            <div>
+                <span class="text-lg font-bold tracking-tighter text-slate-900 dark:text-white uppercase">MEHARE TV</span>
+                <span class="block text-[0.6rem] font-medium tracking-wide text-brand-gold uppercase">Christian Television</span>
+            </div>
+            <button onclick="closeSidebar()" class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-lg hover:bg-white/50 dark:hover:bg-slate-800/50 transition-colors">
+                <span class="iconify" data-icon="lucide:x" data-width="20"></span>
+            </button>
+        </div>
+
+        <!-- Sidebar Navigation Links -->
+        <nav class="flex-1 overflow-y-auto py-6 px-4">
+            <ul class="space-y-1">
+                <li>
+                    <button onclick="navigateTo('home')" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand-800 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-800/60 rounded-xl transition-all backdrop-blur-sm">
+                        <span class="iconify" data-icon="lucide:home" data-width="20"></span>
+                        Home
+                    </button>
+                </li>
+                <li>
+                    <button onclick="navigateTo('about')" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand-800 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-800/60 rounded-xl transition-all backdrop-blur-sm">
+                        <span class="iconify" data-icon="lucide:users" data-width="20"></span>
+                        About Us
+                    </button>
+                </li>
+                <li>
+                    <button onclick="navigateTo('programs')" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand-800 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-800/60 rounded-xl transition-all backdrop-blur-sm">
+                        <span class="iconify" data-icon="lucide:tv" data-width="20"></span>
+                        Programs
+                    </button>
+                </li>
+                <li>
+                    <button onclick="navigateTo('media')" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand-800 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-800/60 rounded-xl transition-all backdrop-blur-sm">
+                        <span class="iconify" data-icon="lucide:play-circle" data-width="20"></span>
+                        Media Library
+                    </button>
+                </li>
+                <li>
+                    <button onclick="navigateTo('news')" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand-800 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-800/60 rounded-xl transition-all backdrop-blur-sm">
+                        <span class="iconify" data-icon="lucide:newspaper" data-width="20"></span>
+                        News &amp; Updates
+                    </button>
+                </li>
+                <li>
+                    <button onclick="navigateTo('subscribe')" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand-800 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-800/60 rounded-xl transition-all backdrop-blur-sm">
+                        <span class="iconify" data-icon="lucide:mail" data-width="20"></span>
+                        Subscribe
+                    </button>
+                </li>
+                <li>
+                    <button onclick="navigateTo('contact')" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand-800 dark:hover:text-white hover:bg-white/60 dark:hover:bg-slate-800/60 rounded-xl transition-all backdrop-blur-sm">
+                        <span class="iconify" data-icon="lucide:phone" data-width="20"></span>
+                        Contact Us
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Sidebar Footer -->
+        <div class="p-4 border-t border-slate-200/50 dark:border-slate-700/50">
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase">Theme</span>
+                <button id="theme-toggle-sidebar" class="p-2 text-slate-500 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-800/50 rounded-lg transition-colors">
+                    <span class="iconify dark:hidden" data-icon="lucide:moon" data-width="18"></span>
+                    <span class="iconify hidden dark:block" data-icon="lucide:sun" data-width="18"></span>
+                </button>
+            </div>
+            <div class="flex gap-3">
+                <a href="#" class="w-9 h-9 rounded-full glass-subtle flex items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-brand-800 hover:text-white transition-colors border border-white/30 dark:border-slate-700/50">
+                    <span class="iconify" data-icon="lucide:youtube" data-width="16"></span>
+                </a>
+                <a href="#" class="w-9 h-9 rounded-full glass-subtle flex items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-brand-800 hover:text-white transition-colors border border-white/30 dark:border-slate-700/50">
+                    <span class="iconify" data-icon="lucide:facebook" data-width="16"></span>
+                </a>
+                <a href="#" class="w-9 h-9 rounded-full glass-subtle flex items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-brand-800 hover:text-white transition-colors border border-white/30 dark:border-slate-700/50">
+                    <span class="iconify" data-icon="lucide:instagram" data-width="16"></span>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-40 w-full glass border-b border-white/30 dark:border-slate-700/50 shadow-lg shadow-slate-200/20 dark:shadow-slate-900/30 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Left: Hamburger Menu -->
+                <button id="menu-btn" onclick="openSidebar()" class="p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-slate-800/50 rounded-lg transition-colors">
+                    <span class="iconify" data-icon="lucide:menu" data-width="24" data-height="24"></span>
+                </button>
+
+                <!-- Center: Logo -->
+                <a href="#" onclick="navigateTo('home')" class="flex flex-col items-center group absolute left-1/2 -translate-x-1/2">
+                    <span class="text-lg font-bold tracking-tighter text-slate-900 dark:text-white group-hover:text-brand-800 dark:group-hover:text-brand-300 transition-colors uppercase">MEHARE TV</span>
+                    <span class="text-[0.55rem] font-medium tracking-wide text-brand-gold uppercase">Christian Television</span>
+                </a>
+
+                <!-- Right: Theme Toggle -->
+                <button id="theme-toggle" class="p-2 text-slate-500 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-800/50 rounded-lg transition-colors focus:outline-none">
+                    <span class="iconify dark:hidden" data-icon="lucide:moon" data-width="20"></span>
+                    <span class="iconify hidden dark:block" data-icon="lucide:sun" data-width="20"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+
+        <!-- ================= HOME PAGE ================= -->
+        <section id="home" class="page-section active">
+            <!-- Hero Section with Image Slider -->
+            <div class="relative overflow-hidden">
+                <!-- Image Slider Background -->
+                <div class="absolute inset-0 z-0">
+                    <!-- Slide 1 - Bible Teaching -->
+                    <div class="hero-slide active" data-slide="0">
+                        <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=1920&amp;q=80" alt="Bible Teaching" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/50 dark:from-slate-950/95 dark:via-slate-950/80 dark:to-slate-950/60"></div>
+                    </div>
+                    <!-- Slide 2 - Worship -->
+                    <div class="hero-slide" data-slide="1">
+                        <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1920&amp;q=80" alt="Worship" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/50 dark:from-slate-950/95 dark:via-slate-950/80 dark:to-slate-950/60"></div>
+                    </div>
+                    <!-- Slide 3 - Community -->
+                    <div class="hero-slide" data-slide="2">
+                        <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=1920&amp;q=80" alt="Community" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/50 dark:from-slate-950/95 dark:via-slate-950/80 dark:to-slate-950/60"></div>
+                    </div>
+                    <!-- Slide 4 - Prayer -->
+                    <div class="hero-slide" data-slide="3">
+                        <img src="https://images.unsplash.com/photo-1445445290350-18a3b86e0b5a?w=1920&amp;q=80" alt="Prayer" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/50 dark:from-slate-950/95 dark:via-slate-950/80 dark:to-slate-950/60"></div>
+                    </div>
+                </div>
+
+                <!-- Hero Content -->
+                <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-36">
+                    <div class="max-w-3xl">
+                        <div class="inline-flex items-center justify-center px-4 py-1.5 mb-8 text-xs font-medium bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white/90">
+                            <span class="iconify mr-2 text-brand-gold" data-icon="lucide:book-open" data-width="14"></span>
+                            Take every thought captive to obey Christ. — 1 Cor 10:5
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white mb-6 leading-[1.1]">
+                            Welcome to Mehare <br class="hidden sm:block"> Christian Television Channel
+                        </h1>
+                        <p class="mt-4 text-lg text-slate-300 max-w-2xl leading-relaxed">
+                            Mehare TV is a Christian media ministry created to teach the Word of God clearly, honestly, and without confusion. Our purpose is to help today's generation understand the Bible, grow in faith, and find true peace in Christ.
+                        </p>
+                        <div class="mt-10 flex flex-wrap gap-4">
+                            <button onclick="navigateTo('media')" class="px-8 py-3.5 text-sm font-semibold text-white bg-brand-gold hover:bg-amber-600 rounded-full shadow-lg hover:shadow-xl transition-all focus:ring-2 focus:ring-offset-2 focus:ring-brand-gold backdrop-blur-sm">
+                                <span class="flex items-center gap-2">
+                                    <span class="iconify" data-icon="lucide:play-circle" data-width="18"></span>
+                                    Watch Videos
+                                </span>
+                            </button>
+                            <button onclick="navigateTo('about')" class="px-8 py-3.5 text-sm font-semibold text-white bg-white/10 backdrop-blur-md border border-white/30 rounded-full hover:bg-white/20 transition-all">
+                                About Us
+                            </button>
+                        </div>
+
+                        <!-- Slide Indicators -->
+                        <div class="flex items-center gap-2 mt-12">
+                            <button onclick="goToSlide(0)" class="slide-indicator active w-8 h-2 bg-brand-gold rounded-full"></button>
+                            <button onclick="goToSlide(1)" class="slide-indicator w-2 h-2 bg-white/40 hover:bg-white/60 rounded-full"></button>
+                            <button onclick="goToSlide(2)" class="slide-indicator w-2 h-2 bg-white/40 hover:bg-white/60 rounded-full"></button>
+                            <button onclick="goToSlide(3)" class="slide-indicator w-2 h-2 bg-white/40 hover:bg-white/60 rounded-full"></button>
+                        </div>
+                    </div>
+
+                    <!-- Slider Navigation Arrows -->
+                    <div class="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 flex flex-col gap-3">
+                        <button onclick="prevSlide()" class="w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all">
+                            <span class="iconify" data-icon="lucide:chevron-up" data-width="24"></span>
+                        </button>
+                        <button onclick="nextSlide()" class="w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all">
+                            <span class="iconify" data-icon="lucide:chevron-down" data-width="24"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- What We Do -->
+            <div class="bg-slate-50/50 dark:bg-slate-900/50 py-20 border-t border-white/50 dark:border-slate-800 transition-colors duration-300">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-2xl mx-auto mb-16">
+                        <h2 class="text-2xl font-semibold tracking-tight text-slate-900 dark:text-white">What We Do</h2>
+                        <p class="mt-4 text-slate-600 dark:text-slate-400">
+                            We share Christ-centered content that is simple, trustworthy, and focused on biblical truth. No hype. No emotional pressure. No self-promotion. Only the message of Jesus.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Cards -->
+                        <div class="group p-8 glass-card rounded-2xl border border-white/40 dark:border-slate-700/50 hover:border-brand-200 dark:hover:border-brand-700 hover:shadow-lg transition-all cursor-default">
+                            <div class="w-12 h-12 glass rounded-xl shadow-sm border border-white/50 dark:border-slate-700/50 flex items-center justify-center mb-6 text-brand-800 dark:text-brand-400 group-hover:scale-110 transition-transform duration-300">
+                                <span class="iconify" data-icon="lucide:book-open-check" data-width="24"></span>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">Bible Teaching</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Clear, verse-by-verse explanation of Scripture centered on Christ.</p>
+                        </div>
+
+                        <div class="group p-8 glass-card rounded-2xl border border-white/40 dark:border-slate-700/50 hover:border-brand-200 dark:hover:border-brand-700 hover:shadow-lg transition-all cursor-default">
+                            <div class="w-12 h-12 glass rounded-xl shadow-sm border border-white/50 dark:border-slate-700/50 flex items-center justify-center mb-6 text-brand-800 dark:text-brand-400 group-hover:scale-110 transition-transform duration-300">
+                                <span class="iconify" data-icon="lucide:music" data-width="24"></span>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">Worship &amp; Music</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Uplifting, biblically sound music to bring a peaceful atmosphere.</p>
+                        </div>
+
+                        <div class="group p-8 glass-card rounded-2xl border border-white/40 dark:border-slate-700/50 hover:border-brand-200 dark:hover:border-brand-700 hover:shadow-lg transition-all cursor-default">
+                            <div class="w-12 h-12 glass rounded-xl shadow-sm border border-white/50 dark:border-slate-700/50 flex items-center justify-center mb-6 text-brand-800 dark:text-brand-400 group-hover:scale-110 transition-transform duration-300">
+                                <span class="iconify" data-icon="lucide:mic" data-width="24"></span>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">Podcasts</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Honest conversations about life, faith, and real challenges.</p>
+                        </div>
+
+                         <div class="group p-8 glass-card rounded-2xl border border-white/40 dark:border-slate-700/50 hover:border-brand-200 dark:hover:border-brand-700 hover:shadow-lg transition-all cursor-default">
+                            <div class="w-12 h-12 glass rounded-xl shadow-sm border border-white/50 dark:border-slate-700/50 flex items-center justify-center mb-6 text-brand-800 dark:text-brand-400 group-hover:scale-110 transition-transform duration-300">
+                                <span class="iconify" data-icon="lucide:file-text" data-width="24"></span>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">Reports &amp; Documentaries</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Stories of God's work in communities and testimonies of faith.</p>
+                        </div>
+
+                         <div class="group p-8 glass-card rounded-2xl border border-white/40 dark:border-slate-700/50 hover:border-brand-200 dark:hover:border-brand-700 hover:shadow-lg transition-all cursor-default">
+                            <div class="w-12 h-12 glass rounded-xl shadow-sm border border-white/50 dark:border-slate-700/50 flex items-center justify-center mb-6 text-brand-800 dark:text-brand-400 group-hover:scale-110 transition-transform duration-300">
+                                <span class="iconify" data-icon="lucide:film" data-width="24"></span>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">Short Films</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Creative storytelling showing biblical truth in daily life.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Latest Videos -->
+            <div class="bg-slate-100/50 dark:bg-slate-950/50 py-20 transition-colors duration-300">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-end mb-10">
+                        <h2 class="text-2xl font-semibold tracking-tight text-slate-900 dark:text-white">Latest Videos</h2>
+                        <button onclick="navigateTo('media')" class="text-sm font-medium text-brand-800 dark:text-brand-400 hover:text-brand-600 dark:hover:text-brand-300 flex items-center gap-1">
+                            View all <span class="iconify" data-icon="lucide:arrow-right" data-width="16"></span>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Placeholders -->
+                        <div class="group glass-card rounded-xl overflow-hidden border border-white/40 dark:border-slate-700/50 shadow-sm hover:shadow-lg transition-all">
+                            <div class="aspect-video bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=600&amp;q=80" alt="Bible Study" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <div class="w-14 h-14 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
+                                        <span class="iconify text-brand-800 ml-1" data-icon="lucide:play" data-width="24"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-5">
+                                <div class="text-xs font-medium text-brand-gold uppercase tracking-wider mb-2">Bible Teaching</div>
+                                <h3 class="text-base font-semibold text-slate-900 dark:text-white mb-2 group-hover:text-brand-800 dark:group-hover:text-brand-300">Understanding Grace - Part 1</h3>
+                                <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">A deep dive into the concept of grace in the New Testament.</p>
+                            </div>
+                        </div>
+                         <div class="group glass-card rounded-xl overflow-hidden border border-white/40 dark:border-slate-700/50 shadow-sm hover:shadow-lg transition-all">
+                            <div class="aspect-video bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=600&amp;q=80" alt="Worship" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <div class="w-14 h-14 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
+                                        <span class="iconify text-brand-800 ml-1" data-icon="lucide:play" data-width="24"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-5">
+                                <div class="text-xs font-medium text-brand-gold uppercase tracking-wider mb-2">Worship</div>
+                                <h3 class="text-base font-semibold text-slate-900 dark:text-white mb-2 group-hover:text-brand-800 dark:group-hover:text-brand-300">Sunday Worship Session</h3>
+                                <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">Join us for an hour of uninterrupted praise and worship music.</p>
+                            </div>
+                        </div>
+                         <div class="group glass-card rounded-xl overflow-hidden border border-white/40 dark:border-slate-700/50 shadow-sm hover:shadow-lg transition-all">
+                            <div class="aspect-video bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&amp;q=80" alt="Community" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <div class="w-14 h-14 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
+                                        <span class="iconify text-brand-800 ml-1" data-icon="lucide:play" data-width="24"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-5">
+                                <div class="text-xs font-medium text-brand-gold uppercase tracking-wider mb-2">Documentary</div>
+                                <h3 class="text-base font-semibold text-slate-900 dark:text-white mb-2 group-hover:text-brand-800 dark:group-hover:text-brand-300">Light in the Darkness</h3>
+                                <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">A report on the new outreach program in rural Ethiopia.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="glass py-16 border-t border-white/50 dark:border-slate-800 transition-colors duration-300">
+                <div class="max-w-4xl mx-auto px-4 text-center">
+                    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-8">Get Involved</h2>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button onclick="navigateTo('subscribe')" class="px-6 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 glass-card border border-white/40 dark:border-slate-700/50 rounded-lg hover:bg-white/80 dark:hover:bg-slate-800/80 hover:border-slate-300 dark:hover:border-slate-600 transition-all">Support the Ministry</button>
+                        <button onclick="navigateTo('contact')" class="px-6 py-3 text-sm font-medium text-slate-700 dark:text-slate-200 glass-card border border-white/40 dark:border-slate-700/50 rounded-lg hover:bg-white/80 dark:hover:bg-slate-800/80 hover:border-slate-300 dark:hover:border-slate-600 transition-all">Contact Us</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= ABOUT PAGE ================= -->
+        <section id="about" class="page-section">
+            <div class="bg-slate-50/50 dark:bg-slate-950/50 py-16 lg:py-24 transition-colors duration-300">
+                <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h1 class="text-3xl font-semibold tracking-tight text-slate-900 dark:text-white sm:text-4xl">About Us</h1>
+                        <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">Bringing truth back to Christian media.</p>
+                    </div>
+
+                    <div class="space-y-16">
+                        <div>
+                            <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                                <span class="iconify text-brand-gold" data-icon="lucide:users" data-width="20"></span> Who We Are
+                            </h2>
+                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Mehare Christian Television Channel exists to share the pure and accurate Word of God in the Amharic language. We focus on teaching the Bible in a way that is clear, honest, and centered on Christ alone.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                            <div class="glass-card p-8 rounded-2xl border border-white/40 dark:border-slate-700/50 shadow-sm">
+                                <h2 class="text-lg font-semibold text-slate-900 dark:text-white mb-3 text-brand-800 dark:text-brand-300">Our Vision</h2>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                                    To raise a generation of believers who understand Scripture, grow in spiritual maturity, and are able to recognize and resist false teachings.
+                                </p>
+                            </div>
+                            <div class="glass-card p-8 rounded-2xl border border-white/40 dark:border-slate-700/50 shadow-sm">
+                                <h2 class="text-lg font-semibold text-slate-900 dark:text-white mb-3 text-brand-800 dark:text-brand-300">Our Mission</h2>
+                                <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+                                    <li class="flex items-start gap-2"><span class="iconify text-brand-gold mt-0.5" data-icon="lucide:check-circle-2" data-width="16"></span> Teaching the Bible in simple and clear language</li>
+                                    <li class="flex items-start gap-2"><span class="iconify text-brand-gold mt-0.5" data-icon="lucide:check-circle-2" data-width="16"></span> Creating worship and music that honor God</li>
+                                    <li class="flex items-start gap-2"><span class="iconify text-brand-gold mt-0.5" data-icon="lucide:check-circle-2" data-width="16"></span> Hosting real conversations about life and faith</li>
+                                    <li class="flex items-start gap-2"><span class="iconify text-brand-gold mt-0.5" data-icon="lucide:check-circle-2" data-width="16"></span> Sharing stories of what God is doing</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-6 text-center">Our Values</h2>
+                            <div class="flex flex-wrap justify-center gap-3">
+                                <span class="px-4 py-2 rounded-full glass-card border border-white/40 dark:border-slate-700/50 text-sm font-medium text-slate-700 dark:text-slate-300 shadow-sm">Christ First</span>
+                                <span class="px-4 py-2 rounded-full glass-card border border-white/40 dark:border-slate-700/50 text-sm font-medium text-slate-700 dark:text-slate-300 shadow-sm">Truth</span>
+                                <span class="px-4 py-2 rounded-full glass-card border border-white/40 dark:border-slate-700/50 text-sm font-medium text-slate-700 dark:text-slate-300 shadow-sm">Humility</span>
+                                <span class="px-4 py-2 rounded-full glass-card border border-white/40 dark:border-slate-700/50 text-sm font-medium text-slate-700 dark:text-slate-300 shadow-sm">Clarity</span>
+                                <span class="px-4 py-2 rounded-full glass-card border border-white/40 dark:border-slate-700/50 text-sm font-medium text-slate-700 dark:text-slate-300 shadow-sm">Integrity</span>
+                                <span class="px-4 py-2 rounded-full glass-card border border-white/40 dark:border-slate-700/50 text-sm font-medium text-slate-700 dark:text-slate-300 shadow-sm">Peace</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-brand-800/90 dark:bg-slate-800/90 backdrop-blur-xl text-white p-10 rounded-3xl relative overflow-hidden border border-brand-700/50 dark:border-slate-700/50">
+                            <div class="relative z-10">
+                                <h3 class="text-xl font-semibold mb-4 text-brand-goldLight">Message From the Founder</h3>
+                                <p class="text-brand-100 dark:text-slate-300 italic leading-relaxed mb-6">
+                                    "Mehare TV was created from a deep desire to bring back truth into Christian media. Many young people today are confused by mixed messages and false teachings. This ministry is here to provide clear, strong, and peaceful Bible teaching that brings the focus back to Christ alone."
+                                </p>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-brand-600/50 dark:bg-slate-700/50 backdrop-blur-sm rounded-full flex items-center justify-center font-bold text-white text-sm border border-white/20">AW</div>
+                                    <div>
+                                        <div class="text-sm font-semibold">Amanuel Worku</div>
+                                        <div class="text-xs text-brand-300 dark:text-slate-400">Founder of Mehare TV</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="absolute -right-10 -bottom-10 opacity-10">
+                                <span class="iconify" data-icon="lucide:quote" data-width="200"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PROGRAMS PAGE ================= -->
+        <section id="programs" class="page-section">
+            <div class="glass pt-20 pb-16 transition-colors duration-300">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h1 class="text-3xl font-semibold tracking-tight text-slate-900 dark:text-white sm:text-4xl">Our Programs</h1>
+                        <p class="mt-4 text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">Content designed to edify, educate, and encourage.</p>
+                    </div>
+
+                    <div class="space-y-24">
+                        <!-- Bible Teaching -->
+                        <div class="flex flex-col md:flex-row gap-12 items-center">
+                            <div class="md:w-1/2 order-2 md:order-1">
+                                <div class="inline-flex items-center justify-center p-3 glass-card rounded-xl text-brand-800 dark:text-brand-300 mb-6 border border-white/40 dark:border-slate-700/50">
+                                    <span class="iconify" data-icon="lucide:book-open-check" data-width="32"></span>
+                                </div>
+                                <h2 class="text-2xl font-semibold text-slate-900 dark:text-white mb-4">Bible Teaching</h2>
+                                <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                                    This is the heart of Mehare TV. Our Bible teaching programs focus on clear, simple, and accurate explanation of Scripture. Each teaching is designed to help viewers understand the true meaning of the Bible without confusion or exaggeration.
+                                </p>
+                                <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                                    We explain passages verse by verse, discuss real-life application, and make sure everything stays centered on Christ. These teachings are short, practical, and easy for anyone to follow.
+                                </p>
+                            </div>
+                            <div class="md:w-1/2 order-1 md:order-2">
+                                <div class="aspect-video glass-card rounded-2xl shadow-sm border border-white/40 dark:border-slate-700/50 overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=800&amp;q=80" alt="Bible Study" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Worship -->
+                        <div class="flex flex-col md:flex-row gap-12 items-center">
+                            <div class="md:w-1/2">
+                                <div class="aspect-video glass-card rounded-2xl shadow-sm border border-white/40 dark:border-slate-700/50 overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&amp;q=80" alt="Worship" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <div class="md:w-1/2">
+                                <div class="inline-flex items-center justify-center p-3 glass-card rounded-xl text-brand-gold mb-6 border border-white/40 dark:border-slate-700/50">
+                                    <span class="iconify" data-icon="lucide:music" data-width="32"></span>
+                                </div>
+                                <h2 class="text-2xl font-semibold text-slate-900 dark:text-white mb-4">Worship &amp; Music</h2>
+                                <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                                    Our worship and music programs are created to bring viewers into a peaceful and Christ-centered atmosphere. We produce original Christian songs that are biblically sound and spiritually uplifting. 
+                                </p>
+                                <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                                    Every song is written with care, focusing on truth rather than performance. We aim to create worship that helps believers reflect on God's goodness.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Podcasts -->
+                        <div class="flex flex-col md:flex-row gap-12 items-center">
+                            <div class="md:w-1/2 order-2 md:order-1">
+                                <div class="inline-flex items-center justify-center p-3 glass-card rounded-xl text-blue-600 dark:text-blue-400 mb-6 border border-white/40 dark:border-slate-700/50">
+                                    <span class="iconify" data-icon="lucide:mic" data-width="32"></span>
+                                </div>
+                                <h2 class="text-2xl font-semibold text-slate-900 dark:text-white mb-4">Podcasts</h2>
+                                <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                                    The podcast programs offer honest conversations about the daily challenges people face. We talk about identity, relationships, struggles, questions of faith, and real issues.
+                                </p>
+                                <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                                    Each episode is friendly, relatable, and grounded in the Bible. The goal is to create a space where people feel understood and encouraged.
+                                </p>
+                            </div>
+                            <div class="md:w-1/2 order-1 md:order-2">
+                                <div class="aspect-video glass-card rounded-2xl shadow-sm border border-white/40 dark:border-slate-700/50 overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&amp;q=80" alt="Podcast Studio" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- Reports & Docs -->
+                         <div class="grid md:grid-cols-2 gap-8 pt-8">
+                             <div class="glass-card p-8 rounded-2xl border border-white/40 dark:border-slate-700/50">
+                                <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Reports &amp; Documentaries</h3>
+                                <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                    These programs share stories of what God is doing in Ethiopia and beyond. We cover church events, community activities, testimonies, and movements that bring spiritual impact. Our reports are designed to inform, inspire, and encourage believers by showing how God is working in different places.
+                                </p>
+                             </div>
+                             <div class="glass-card p-8 rounded-2xl border border-white/40 dark:border-slate-700/50">
+                                <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-3">Short Films</h3>
+                                <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                    Our short films use creative storytelling to communicate spiritual truths in a simple and relatable way. Each film is based on a biblical principle and shows how that truth can be lived in daily life. The goal is to help viewers see God's truth in action through characters and situations that feel real.
+                                </p>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= MEDIA LIBRARY PAGE ================= -->
+        <section id="media" class="page-section">
+            <div class="bg-slate-50/50 dark:bg-slate-950/50 min-h-screen py-16 transition-colors duration-300">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h1 class="text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">Media Library</h1>
+                        <p class="mt-2 text-slate-600 dark:text-slate-400">All Our Content in One Place</p>
+                    </div>
+
+                    <!-- Tabs/Filters -->
+                    <div class="flex flex-wrap justify-center gap-2 mb-12">
+                        <button class="px-5 py-2.5 rounded-full bg-brand-800/90 dark:bg-brand-700/90 backdrop-blur-sm text-white text-sm font-medium shadow-sm ring-2 ring-brand-800 dark:ring-brand-700 ring-offset-2 dark:ring-offset-slate-900">All</button>
+                        <button class="px-5 py-2.5 rounded-full glass-card text-slate-600 dark:text-slate-300 border border-white/40 dark:border-slate-700/50 text-sm font-medium hover:bg-white/80 dark:hover:bg-slate-800/80 hover:border-slate-300 dark:hover:border-slate-600">Teachings</button>
+                        <button class="px-5 py-2.5 rounded-full glass-card text-slate-600 dark:text-slate-300 border border-white/40 dark:border-slate-700/50 text-sm font-medium hover:bg-white/80 dark:hover:bg-slate-800/80 hover:border-slate-300 dark:hover:border-slate-600">Worship</button>
+                        <button class="px-5 py-2.5 rounded-full glass-card text-slate-600 dark:text-slate-300 border border-white/40 dark:border-slate-700/50 text-sm font-medium hover:bg-white/80 dark:hover:bg-slate-800/80 hover:border-slate-300 dark:hover:border-slate-600">Podcasts</button>
+                        <button class="px-5 py-2.5 rounded-full glass-card text-slate-600 dark:text-slate-300 border border-white/40 dark:border-slate-700/50 text-sm font-medium hover:bg-white/80 dark:hover:bg-slate-800/80 hover:border-slate-300 dark:hover:border-slate-600">Short Films</button>
+                    </div>
+
+                    <!-- Video Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <!-- Card 1 -->
+                        <div class="glass-card rounded-xl overflow-hidden border border-white/40 dark:border-slate-700/50 shadow-sm hover:shadow-lg transition-all group">
+                            <div class="aspect-[16/9] bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=400&amp;q=80" alt="Bible" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <div class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
+                                        <span class="iconify text-brand-800 ml-1" data-icon="lucide:play" data-width="20"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-snug mb-1">Foundations of Faith</h3>
+                                <div class="flex justify-between items-center text-xs text-slate-500 dark:text-slate-400 mt-2">
+                                    <span>Bible Teaching</span>
+                                    <span>15 mins</span>
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- Card 2 -->
+                         <div class="glass-card rounded-xl overflow-hidden border border-white/40 dark:border-slate-700/50 shadow-sm hover:shadow-lg transition-all group">
+                            <div class="aspect-[16/9] bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=400&amp;q=80" alt="Worship" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <div class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
+                                        <span class="iconify text-brand-800 ml-1" data-icon="lucide:play" data-width="20"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-snug mb-1">Morning Prayer</h3>
+                                <div class="flex justify-between items-center text-xs text-slate-500 dark:text-slate-400 mt-2">
+                                    <span>Worship</span>
+                                    <span>45 mins</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="glass-card rounded-xl overflow-hidden border border-white/40 dark:border-slate-700/50 shadow-sm hover:shadow-lg transition-all group">
+                            <div class="aspect-[16/9] bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=400&amp;q=80" alt="Podcast" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <div class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
+                                        <span class="iconify text-brand-800 ml-1" data-icon="lucide:play" data-width="20"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-snug mb-1">Youth &amp; Culture</h3>
+                                <div class="flex justify-between items-center text-xs text-slate-500 dark:text-slate-400 mt-2">
+                                    <span>Podcast</span>
+                                    <span>30 mins</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div class="glass-card rounded-xl overflow-hidden border border-white/40 dark:border-slate-700/50 shadow-sm hover:shadow-lg transition-all group">
+                            <div class="aspect-[16/9] bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&amp;q=80" alt="Community" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <div class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
+                                        <span class="iconify text-brand-800 ml-1" data-icon="lucide:play" data-width="20"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white leading-snug mb-1">Community Outreach</h3>
+                                <div class="flex justify-between items-center text-xs text-slate-500 dark:text-slate-400 mt-2">
+                                    <span>Report</span>
+                                    <span>8 mins</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= NEWS PAGE ================= -->
+        <section id="news" class="page-section">
+            <div class="glass py-16 transition-colors duration-300">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6">
+                    <div class="mb-12">
+                        <h1 class="text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">News &amp; Updates</h1>
+                        <p class="mt-2 text-slate-600 dark:text-slate-400">Stay informed with what's happening at Mehare TV.</p>
+                    </div>
+
+                    <div class="space-y-8">
+                        <!-- News Item -->
+                        <div class="flex flex-col sm:flex-row gap-6 p-6 rounded-2xl glass-card border border-white/40 dark:border-slate-700/50 hover:border-slate-200 dark:hover:border-slate-600 transition-colors">
+                            <div class="sm:w-32 sm:h-32 w-full h-48 bg-slate-200 dark:bg-slate-800 rounded-xl flex-shrink-0 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&amp;q=80" alt="Studio" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <div class="text-xs font-medium text-brand-gold uppercase tracking-wider mb-2">Ministry Update</div>
+                                <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">New Studio Construction</h3>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-2">
+                                    We are excited to announce the beginning of our new studio construction which will allow us to produce higher quality content for our viewers.
+                                </p>
+                                <button class="text-sm font-medium text-brand-800 dark:text-brand-300 hover:text-brand-900 dark:hover:text-white flex items-center gap-1">Read more <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span></button>
+                            </div>
+                        </div>
+
+                        <!-- News Item -->
+                        <div class="flex flex-col sm:flex-row gap-6 p-6 rounded-2xl glass-card border border-white/40 dark:border-slate-700/50 hover:border-slate-200 dark:hover:border-slate-600 transition-colors">
+                            <div class="sm:w-32 sm:h-32 w-full h-48 bg-slate-200 dark:bg-slate-800 rounded-xl flex-shrink-0 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=300&amp;q=80" alt="Conference" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <div class="text-xs font-medium text-brand-gold uppercase tracking-wider mb-2">Upcoming Event</div>
+                                <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">Youth Conference 2025</h3>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-2">
+                                    Join us this summer for a powerful time of worship and teaching designed specifically for the next generation.
+                                </p>
+                                <button class="text-sm font-medium text-brand-800 dark:text-brand-300 hover:text-brand-900 dark:hover:text-white flex items-center gap-1">Read more <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= SUBSCRIBE PAGE ================= -->
+        <section id="subscribe" class="page-section">
+            <div class="min-h-[80vh] flex items-center justify-center bg-slate-100/50 dark:bg-slate-950/50 px-4 transition-colors duration-300">
+                <div class="w-full max-w-lg glass-card p-8 sm:p-12 rounded-3xl shadow-lg border border-white/40 dark:border-slate-700/50 text-center">
+                    <div class="w-16 h-16 glass rounded-full flex items-center justify-center mx-auto mb-6 border border-white/50 dark:border-slate-700/50">
+                        <span class="iconify text-brand-800 dark:text-brand-300" data-icon="lucide:mail" data-width="32"></span>
+                    </div>
+                    <h1 class="text-2xl font-semibold text-slate-900 dark:text-white mb-2">Stay Connected</h1>
+                    <p class="text-slate-600 dark:text-slate-400 mb-8">Subscribe to receive new videos, devotionals, and ministry updates directly to your inbox.</p>
+
+                    <form onsubmit="event.preventDefault(); alert('Thank you for subscribing!');" class="space-y-4 text-left">
+                        <div>
+                            <label for="sub-name" class="block text-xs font-medium text-slate-700 dark:text-slate-300 uppercase mb-1">Full Name</label>
+                            <input type="text" id="sub-name" class="w-full px-4 py-3 rounded-lg border border-white/50 dark:border-slate-700 glass dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:focus:ring-brand-900 outline-none transition-all" placeholder="Enter your name" required="">
+                        </div>
+                        <div>
+                            <label for="sub-email" class="block text-xs font-medium text-slate-700 dark:text-slate-300 uppercase mb-1">Email Address</label>
+                            <input type="email" id="sub-email" class="w-full px-4 py-3 rounded-lg border border-white/50 dark:border-slate-700 glass dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:focus:ring-brand-900 outline-none transition-all" placeholder="Enter your email" required="">
+                        </div>
+                        <button type="submit" class="w-full py-3.5 bg-brand-800/90 dark:bg-brand-700/90 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-brand-900 dark:hover:bg-brand-600 transition-colors shadow-md mt-2">
+                            Subscribe
+                        </button>
+                    </form>
+                    <p class="text-xs text-slate-400 dark:text-slate-500 mt-6">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= CONTACT PAGE ================= -->
+        <section id="contact" class="page-section">
+            <div class="glass py-16 transition-colors duration-300">
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                        <!-- Left: Info -->
+                        <div>
+                            <h1 class="text-3xl font-semibold tracking-tight text-slate-900 dark:text-white mb-6">Contact Mehare TV</h1>
+                            <p class="text-lg text-slate-600 dark:text-slate-400 mb-10">We welcome your questions, comments, and messages. We'd love to hear from you.</p>
+
+                            <div class="space-y-8">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-full glass-card flex items-center justify-center flex-shrink-0 text-brand-800 dark:text-brand-300 border border-white/50 dark:border-slate-700/50">
+                                        <span class="iconify" data-icon="lucide:map-pin" data-width="20"></span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium text-slate-900 dark:text-white">Location</h3>
+                                        <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Addis Ababa, Ethiopia</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-full glass-card flex items-center justify-center flex-shrink-0 text-brand-800 dark:text-brand-300 border border-white/50 dark:border-slate-700/50">
+                                        <span class="iconify" data-icon="lucide:mail" data-width="20"></span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium text-slate-900 dark:text-white">Email</h3>
+                                        <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">info@meharetv.org</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-full glass-card flex items-center justify-center flex-shrink-0 text-brand-800 dark:text-brand-300 border border-white/50 dark:border-slate-700/50">
+                                        <span class="iconify" data-icon="lucide:phone" data-width="20"></span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-medium text-slate-900 dark:text-white">Phone</h3>
+                                        <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">+251 91 182 7378</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-12">
+                                <h3 class="text-sm font-semibold text-slate-900 dark:text-white uppercase tracking-wider mb-4">Follow Us</h3>
+                                <div class="flex gap-4">
+                                    <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-brand-800 dark:hover:bg-brand-600 hover:text-white transition-colors border border-white/50 dark:border-slate-700/50">
+                                        <span class="iconify" data-icon="lucide:youtube" data-width="20"></span>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-brand-800 dark:hover:bg-brand-600 hover:text-white transition-colors border border-white/50 dark:border-slate-700/50">
+                                        <span class="iconify" data-icon="lucide:facebook" data-width="20"></span>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-brand-800 dark:hover:bg-brand-600 hover:text-white transition-colors border border-white/50 dark:border-slate-700/50">
+                                        <span class="iconify" data-icon="lucide:instagram" data-width="20"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Form -->
+                        <div class="glass-card p-8 rounded-3xl border border-white/40 dark:border-slate-700/50 shadow-lg">
+                            <form onsubmit="event.preventDefault(); alert('Message sent!');" class="space-y-5">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-700 dark:text-slate-300 uppercase mb-1">Name</label>
+                                    <input type="text" class="w-full px-4 py-3 rounded-lg border border-white/50 dark:border-slate-700 glass dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:focus:ring-brand-900 outline-none transition-all" placeholder="Your name">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-700 dark:text-slate-300 uppercase mb-1">Email</label>
+                                    <input type="email" class="w-full px-4 py-3 rounded-lg border border-white/50 dark:border-slate-700 glass dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:focus:ring-brand-900 outline-none transition-all" placeholder="Your email">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-700 dark:text-slate-300 uppercase mb-1">Message</label>
+                                    <textarea rows="4" class="w-full px-4 py-3 rounded-lg border border-white/50 dark:border-slate-700 glass dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-200 dark:focus:ring-brand-900 outline-none transition-all" placeholder="How can we help?"></textarea>
+                                </div>
+                                <button type="submit" class="w-full py-3.5 bg-brand-800/90 dark:bg-brand-700/90 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-brand-900 dark:hover:bg-brand-600 transition-colors shadow-md">
+                                    Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900/95 dark:bg-slate-950/95 backdrop-blur-xl text-slate-400 py-12 border-t border-slate-800/50 dark:border-slate-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-white text-lg font-bold mb-4">MEHARE TV</h3>
+                    <p class="text-sm leading-relaxed max-w-xs text-slate-400">
+                        Teaching the Word of God clearly, honestly, and without confusion. To help today's generation find true peace in Christ.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white text-sm font-semibold mb-4 uppercase tracking-wider">Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><button onclick="navigateTo('programs')" class="hover:text-white transition-colors">Programs</button></li>
+                        <li><button onclick="navigateTo('media')" class="hover:text-white transition-colors">Media Library</button></li>
+                        <li><button onclick="navigateTo('about')" class="hover:text-white transition-colors">About Us</button></li>
+                        <li><button onclick="navigateTo('contact')" class="hover:text-white transition-colors">Contact</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-sm font-semibold mb-4 uppercase tracking-wider">Legal</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800/50 dark:border-slate-900/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+                <p>© 2025 Mehare Christian Television Channel. All rights reserved.</p>
+                <p class="font-medium text-slate-500">መሐረ ክርስቲያን ቴሌቪዥን ጣቢያ</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Routing, Theme, Slider and Interactivity -->
+    <script>
+        // --- Theme Logic ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleSidebar = document.getElementById('theme-toggle-sidebar');
+        const htmlElement = document.documentElement;
+
+        if (localStorage.theme === 'light') {
+            htmlElement.classList.remove('dark');
+        } else {
+            htmlElement.classList.add('dark');
+        }
+
+        function toggleTheme() {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        themeToggleBtn.addEventListener('click', toggleTheme);
+        themeToggleSidebar.addEventListener('click', toggleTheme);
+
+        // --- Sidebar Logic ---
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+        function openSidebar() {
+            sidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // --- Hero Slider Logic ---
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const indicators = document.querySelectorAll('.slide-indicator');
+        const totalSlides = slides.length;
+        let slideInterval;
+
+        function goToSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            indicators[currentSlide].classList.remove('active', 'w-8', 'bg-brand-gold');
+            indicators[currentSlide].classList.add('w-2', 'bg-white/40');
+
+            currentSlide = index;
+            if (currentSlide >= totalSlides) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
+
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active', 'w-8', 'bg-brand-gold');
+            indicators[currentSlide].classList.remove('w-2', 'bg-white/40');
+
+            resetSlideInterval();
+        }
+
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            goToSlide(currentSlide - 1);
+        }
+
+        function resetSlideInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        // Start auto-slide
+        slideInterval = setInterval(nextSlide, 5000);
+
+        // --- Routing Logic ---
+        function navigateTo(pageId) {
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+                setTimeout(() => {
+                    if(!section.classList.contains('active')) section.style.display = 'none';
+                }, 300);
+            });
+
+            const target = document.getElementById(pageId);
+            if (target) {
+                target.style.display = 'block';
+                requestAnimationFrame(() => {
+                    target.classList.add('active');
+                });
+                window.scrollTo(0, 0);
+            }
+
+            // Update sidebar active states
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                if (link.getAttribute('onclick').includes(pageId)) {
+                    link.classList.add('bg-white/60', 'dark:bg-slate-800/60', 'text-brand-800', 'dark:text-brand-300');
+                    link.classList.remove('text-slate-700', 'dark:text-slate-300');
+                } else {
+                    link.classList.remove('bg-white/60', 'dark:bg-slate-800/60', 'text-brand-800', 'dark:text-brand-300');
+                    link.classList.add('text-slate-700', 'dark:text-slate-300');
+                }
+            });
+
+            closeSidebar();
+        }
+
+        // Initialize Home
+        document.addEventListener('DOMContentLoaded', () => {
+            navigateTo('home');
+        });
+    </script>
+
+</body></html>

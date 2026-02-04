@@ -30,7 +30,7 @@ export const Hero = () => {
           />
         </div>
         {/* Subtle Grid Overlay for Engineering Aesthetic */}
-        <div 
+        <div
           className="absolute inset-0 z-0 opacity-[0.05]"
           style={{
             backgroundImage: `
@@ -42,7 +42,7 @@ export const Hero = () => {
         />
         {/* Green accent line at top */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-secondary z-10" />
-        
+
         <div className="section-container relative z-10 w-full">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-start">
             {/* Left Side: Heading and Description */}
@@ -82,14 +82,14 @@ export const Hero = () => {
                 transition={{ duration: 0.6, delay: 0.5 }}
                 className="flex flex-col sm:flex-row gap-3 sm:gap-4"
               >
-                <button 
+                <button
                   onClick={() => scrollToSection('#contact')}
                   className="group px-6 sm:px-8 py-3.5 sm:py-4 border-2 border-primary-foreground text-primary-foreground font-semibold rounded-[6px] hover:bg-secondary hover:border-secondary hover:text-secondary-foreground active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl touch-manipulation min-h-[48px] text-sm sm:text-base"
                 >
                   Get a Free Pilot Task
                   <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform flex-shrink-0" />
                 </button>
-                <button 
+                <button
                   onClick={() => scrollToSection('#services')}
                   className="px-6 sm:px-8 py-3.5 sm:py-4 border-2 border-primary-foreground text-primary-foreground font-semibold rounded-[6px] hover:bg-secondary hover:border-secondary hover:text-secondary-foreground active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl touch-manipulation min-h-[48px] text-sm sm:text-base"
                 >
@@ -112,7 +112,7 @@ export const Hero = () => {
               >
                 {/* Subtle glow effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-secondary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
+
                 {/* Section Header */}
                 <h3 className="text-xs font-bold text-primary-foreground/80 uppercase tracking-[0.15em] mb-6 sm:mb-8 relative z-10">
                   Drafting Services
@@ -144,14 +144,14 @@ export const Hero = () => {
                       key={index}
                       variants={{
                         hidden: { opacity: 0, x: -20 },
-                        visible: { 
-                          opacity: 1, 
+                        visible: {
+                          opacity: 1,
                           x: 0,
                           transition: { duration: 0.4 }
                         }
                       }}
                       className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-primary-foreground/10 border border-primary-foreground/20 hover:bg-primary-foreground/20 hover:border-primary-foreground/30 transition-all duration-300 relative z-10 group/item"
-                      whileHover={{ 
+                      whileHover={{
                         x: 6,
                         scale: 1.02,
                         transition: { duration: 0.2 }

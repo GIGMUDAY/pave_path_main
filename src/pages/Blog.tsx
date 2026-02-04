@@ -1,86 +1,50 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, Search, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-
-// Sample blog posts - in production, this would come from a CMS or API
-const allBlogPosts = [
-  {
-    id: 1,
-    slug: 'how-overflow-drafting-helps-civil-firms-meet-deadlines',
-    title: 'How Overflow Drafting Helps Civil Engineering Firms Meet Tight Deadlines',
-    excerpt: 'Discover how overflow drafting support helps civil engineering firms stay ahead of deadlines, reduce backlog, and maintain production quality during peak workload cycles.',
-    content: 'Full article content would go here...',
-    author: 'PavePath Team',
-    date: '2024-01-15',
-    readTime: '5 min read',
-    category: 'Drafting Tips',
-    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=600&fit=crop&q=80',
-  },
-  {
-    id: 2,
-    slug: 'ada-curb-ramp-drafting-best-practices',
-    title: 'ADA Curb Ramp Drafting: Best Practices for Compliance and Accuracy',
-    excerpt: 'Learn best practices for ADA-compliant curb ramp drafting, including slope geometry, sheet standards, PROWAG rules, and drafting techniques for accurate ramp plan sets.',
-    content: 'Full article content would go here...',
-    author: 'PavePath Team',
-    date: '2024-01-10',
-    readTime: '7 min read',
-    category: 'Compliance',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&q=80',
-  },
-  {
-    id: 3,
-    slug: 'how-to-prepare-permit-ready-traffic-control-plan-set',
-    title: 'How to Prepare a Permit-Ready Traffic Control Plan Set',
-    excerpt: 'Learn the essential steps and drafting standards needed to prepare a MUTCD-compliant traffic control plan (TCP) ready for agency permitting.',
-    content: 'Full article content would go here...',
-    author: 'PavePath Team',
-    date: '2024-01-05',
-    readTime: '6 min read',
-    category: 'Traffic Engineering',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop&q=80',
-  },
-  {
-    id: 4,
-    slug: 'why-small-civil-firms-are-turning-to-drafting-pods',
-    title: 'Why Small Civil Engineering Firms Are Turning to Drafting Pods',
-    excerpt: 'Discover why small and mid-size civil engineering firms are adopting drafting Pods to expand capacity, improve quality, and deliver projects faster.',
-    content: 'Full article content would go here...',
-    author: 'PavePath Team',
-    date: '2024-01-01',
-    readTime: '8 min read',
-    category: 'Drafting Tips',
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&fit=crop&q=80',
-  },
-  {
-    id: 5,
-    slug: 'fastest-way-to-reduce-drafting-backlogs',
-    title: 'The Fastest Way to Reduce Drafting Backlogs in Civil Engineering',
-    excerpt: 'Explore practical strategies civil engineering firms can use to reduce drafting backlogs and accelerate project delivery.',
-    content: 'Full article content would go here...',
-    author: 'PavePath Team',
-    date: '2023-12-28',
-    readTime: '6 min read',
-    category: 'Drafting Tips',
-    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=600&fit=crop&q=80',
-  },
-];
-
-const categories = ['All', 'Drafting Tips', 'Compliance', 'Traffic Engineering'];
+import { BlogPost as BlogPostType, fetchPosts } from '@/utils/posts';
 
 const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [posts, setPosts] = useState<BlogPostType[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetchPosts()
+      .then((data) => {
+        if (!isMounted) return;
+        setPosts(data);
+      })
+      .catch((err) => {
+        if (!isMounted) return;
+        console.error(err);
+        setError('Unable to load posts right now.');
+      })
+      .finally(() => {
+        if (isMounted) setLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   };
 
-  const filteredPosts = allBlogPosts.filter((post) => {
+  const categories = useMemo(
+    () => ['All', ...Array.from(new Set(posts.map((post) => post.category || 'General')))],
+    [posts]
+  );
+
+  const filteredPosts = posts.filter((post) => {
     const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
     const matchesSearch =
       searchQuery === '' ||
@@ -168,15 +132,21 @@ const Blog = () => {
                       <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-card hover:shadow-hover transition-all duration-300 h-full flex flex-col">
                         {/* Image */}
                         <div className="relative h-48 overflow-hidden">
-                          <img
-                            src={post.image}
-                            alt={post.title}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                          />
+                          {post.image ? (
+                            <img
+                              src={post.image}
+                              alt={post.title}
+                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-muted flex items-center justify-center text-sm text-muted-foreground">
+                              No image
+                            </div>
+                          )}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                           <div className="absolute top-4 left-4">
                             <span className="text-xs font-semibold uppercase tracking-wider text-primary-foreground bg-primary px-3 py-1 rounded-full">
-                              {post.category}
+                              {post.category || 'General'}
                             </span>
                           </div>
                         </div>
@@ -215,7 +185,14 @@ const Blog = () => {
               </div>
             ) : (
               <div className="text-center py-16">
-                <p className="text-muted-foreground text-lg">No articles found matching your criteria.</p>
+                {loading && <p className="text-muted-foreground text-lg">Loading posts...</p>}
+                {error && !loading && <p className="text-red-500 text-lg">{error}</p>}
+                {!loading && !error && posts.length === 0 && (
+                  <p className="text-muted-foreground text-lg">No blog posts published yet. Check back soon!</p>
+                )}
+                {!loading && !error && posts.length > 0 && filteredPosts.length === 0 && (
+                  <p className="text-muted-foreground text-lg">No articles found matching your criteria. Try adjusting your search or filters.</p>
+                )}
               </div>
             )}
           </div>

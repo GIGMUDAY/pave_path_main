@@ -1,30 +1,22 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { logEvent } from 'firebase/analytics';
-import { analytics } from '@/lib/firebase';
 
 /**
- * Hook to track page views with Firebase Analytics
+ * Placeholder analytics hook; replace with Express/other analytics as needed.
  */
 export const usePageTracking = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (analytics) {
-      logEvent(analytics, 'page_view', {
-        page_path: location.pathname + location.search,
-        page_title: document.title,
-      });
-    }
+    // No-op without Firebase; integrate analytics here if needed.
+    void location;
   }, [location]);
 };
 
 /**
- * Track custom events
+ * Placeholder event tracker; replace with real analytics.
  */
-export const trackEvent = (eventName: string, eventParams?: Record<string, any>) => {
-  if (analytics) {
-    logEvent(analytics, eventName, eventParams);
-  }
+export const trackEvent = (_eventName: string, _eventParams?: Record<string, any>) => {
+  // No-op
 };
 

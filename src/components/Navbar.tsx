@@ -17,20 +17,21 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { label: 'Home', href: '#' },
-  { 
-    label: 'Services', 
+  {
+    label: 'Services',
     href: '#services',
     submenu: [
-      { label: 'Civil & Transportation Drafting', href: '#services' },
-      { label: 'ADA Curb Ramp Drafting', href: '#services' },
-      { label: 'Traffic Control Plan Drafting', href: '#services' },
-      { label: 'SWPPP & Erosion Control Drafting', href: '#services' },
-      { label: 'Plan Set Cleanup & Organization', href: '#services' },
+      { label: 'Civil & Transportation Drafting', href: '#civil-transportation' },
+      { label: 'ADA Curb Ramp Drafting', href: '#ada-curb-ramp' },
+      { label: 'Traffic Control Plan Drafting', href: '#traffic-control' },
+      { label: 'SWPPP & Erosion Control Drafting', href: '#swppp-erosion' },
+      { label: 'Plan Set Cleanup & Organization', href: '#plan-cleanup' },
     ]
   },
   { label: 'How We Work', href: '#how-it-works' },
   { label: 'Who We Support', href: '#industries' },
-  { label: 'About PavePath', href: '#about' },
+  { label: 'About', href: '#about' },
+  { label: 'Use Cases', href: '/use-cases' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -47,7 +48,7 @@ export const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      
+
       const sections = navItems.map(item => item.href.substring(1));
       for (const section of sections.reverse()) {
         const element = document.getElementById(section);
@@ -71,7 +72,7 @@ export const Navbar = () => {
       // Save current scroll position
       const currentScroll = window.scrollY || window.pageYOffset;
       setScrollPosition(currentScroll);
-      
+
       document.body.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
       document.body.style.width = '100%';
@@ -100,7 +101,7 @@ export const Navbar = () => {
     // Close menu first
     setIsMobileMenuOpen(false);
     setOpenSubmenu(null);
-    
+
     // Wait for menu to close and body to reset
     setTimeout(() => {
       if (href === '#') {
@@ -119,18 +120,14 @@ export const Navbar = () => {
       } else {
         // Handle anchor links - check if we're on home page
         const isOnHomePage = location.pathname === '/';
-        
+
         if (!isOnHomePage) {
           // Navigate to home page first, then scroll to section
           navigate('/');
           setTimeout(() => {
             const element = document.querySelector(href);
             if (element) {
-              const yOffset = -80; // Offset for fixed navbar
-              const rect = element.getBoundingClientRect();
-              const absoluteElementTop = rect.top + window.pageYOffset;
-              const offsetPosition = absoluteElementTop + yOffset;
-              window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+              element.scrollIntoView({ behavior: 'smooth' });
             }
           }, 300);
         } else {
@@ -139,11 +136,7 @@ export const Navbar = () => {
           if (element) {
             // Wait a bit more to ensure body styles are reset
             setTimeout(() => {
-              const yOffset = -80; // Offset for fixed navbar
-              const rect = element.getBoundingClientRect();
-              const absoluteElementTop = rect.top + window.pageYOffset;
-              const offsetPosition = absoluteElementTop + yOffset;
-              window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+              element.scrollIntoView({ behavior: 'smooth' });
             }, 50);
           }
         }
@@ -160,18 +153,17 @@ export const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 bg-white dark:bg-background ${
-        isScrolled 
-          ? 'shadow-md' 
-          : ''
-      }`}
+      className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 bg-white dark:bg-background ${isScrolled
+        ? 'shadow-md'
+        : ''
+        }`}
     >
       <div className="section-container">
         <div className="flex items-center justify-between h-16 sm:h-20 lg:h-22"> {/* Responsive height */}
           <a href="#" className="flex items-center gap-1.5 sm:gap-2" onClick={(e) => { e.preventDefault(); scrollToSection('#'); }}>
-            <img 
-              src="/pave_logo.jpg" 
-              alt="pavepathdesign" 
+            <img
+              src="/pave_logo.jpg"
+              alt="pavepathdesign"
               className="h-8 sm:h-9 lg:h-10 w-auto object-contain"
             />
             <span className="font-display font-bold text-base sm:text-lg lg:text-xl text-foreground dark:text-foreground">
@@ -186,10 +178,9 @@ export const Navbar = () => {
                 <div key={item.label} className="relative group">
                   <button
                     onClick={() => scrollToSection(item.href)}
-                    className="text-foreground/90 dark:text-foreground/90 hover:text-foreground dark:hover:text-foreground font-medium text-sm transition-colors flex items-center gap-1"
+                    className="text-foreground/90 dark:text-foreground/90 hover:text-foreground dark:hover:text-foreground font-medium text-sm transition-colors"
                   >
                     {item.label}
-                    <ChevronDown className="w-4 h-4" />
                   </button>
                   {/* Submenu dropdown - can be added later if needed */}
                 </div>
@@ -198,9 +189,8 @@ export const Navbar = () => {
                   key={item.label}
                   href={item.href}
                   onClick={(e) => { e.preventDefault(); scrollToSection(item.href); }}
-                  className={`text-foreground/90 dark:text-foreground/90 hover:text-foreground dark:hover:text-foreground font-medium text-sm transition-colors ${
-                    activeSection === item.href.substring(1) ? 'text-foreground dark:text-foreground' : ''
-                  }`}
+                  className={`text-foreground/90 dark:text-foreground/90 hover:text-foreground dark:hover:text-foreground font-medium text-sm transition-colors ${activeSection === item.href.substring(1) ? 'text-foreground dark:text-foreground' : ''
+                    }`}
                 >
                   {item.label}
                 </a>
@@ -238,10 +228,10 @@ export const Navbar = () => {
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
               className="fixed inset-0 bg-primary/60 dark:bg-[hsl(220_60%_25%)]/60 backdrop-blur-md z-[9998]"
-              style={{ 
-                top: 0, 
-                left: 0, 
-                right: 0, 
+              style={{
+                top: 0,
+                left: 0,
+                right: 0,
                 bottom: 0,
                 position: 'fixed',
                 zIndex: 9998
@@ -254,7 +244,7 @@ export const Navbar = () => {
               exit={{ x: '-100%' }}
               transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}
               className="fixed top-0 left-0 bg-primary dark:bg-[hsl(220_60%_25%)] border-r border-primary/20 shadow-2xl overflow-y-auto w-full sm:w-[90%] md:w-[85%] lg:w-[400px] max-w-[400px]"
-              style={{ 
+              style={{
                 height: '100vh',
                 position: 'fixed',
                 zIndex: 9999
@@ -278,17 +268,17 @@ export const Navbar = () => {
                   <div key={item.href}>
                     {item.submenu ? (
                       <div>
-                      <button
-                        onClick={() => toggleSubmenu(item.label)}
-                        className="w-full text-left text-primary-foreground hover:bg-primary/80 transition-colors py-4 px-4 sm:px-6 flex items-center justify-between border-b border-primary/20 touch-manipulation min-h-[48px]"
-                      >
-                        <span className="text-base sm:text-base">{item.label}</span>
-                        {openSubmenu === item.label ? (
-                          <ChevronUp size={18} className="text-primary-foreground flex-shrink-0" />
-                        ) : (
-                          <ChevronDown size={18} className="text-primary-foreground flex-shrink-0" />
-                        )}
-                      </button>
+                        <button
+                          onClick={() => toggleSubmenu(item.label)}
+                          className="w-full text-left text-primary-foreground hover:bg-primary/80 transition-colors py-4 px-4 sm:px-6 flex items-center justify-between border-b border-primary/20 touch-manipulation min-h-[48px]"
+                        >
+                          <span className="text-base sm:text-base">{item.label}</span>
+                          {openSubmenu === item.label ? (
+                            <ChevronUp size={18} className="text-primary-foreground flex-shrink-0" />
+                          ) : (
+                            <ChevronDown size={18} className="text-primary-foreground flex-shrink-0" />
+                          )}
+                        </button>
                         <AnimatePresence>
                           {openSubmenu === item.label && (
                             <motion.div

@@ -1,6 +1,12 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Settings, Upload, CheckCircle2, FileCheck, Building2, Car, HardHat, Briefcase } from 'lucide-react';
+import { Settings, Upload, CheckCircle2, FileCheck } from 'lucide-react';
+import {
+  BuildingOfficeIcon,
+  ShieldCheckIcon,
+  WrenchScrewdriverIcon,
+  BriefcaseIcon,
+} from '@heroicons/react/24/outline';
 
 const steps = [
   {
@@ -60,25 +66,25 @@ const steps = [
 
 const engagementOptions = [
   {
-    icon: Building2,
+    icon: BuildingOfficeIcon,
     title: 'Civil & Transportation Engineering Firms',
     description: 'Backlogged with plan production? We help with ADA, TCP, SWPPP, and general civil drafting.',
     accent: 'from-secondary/20 to-secondary/10',
   },
   {
-    icon: Car,
+    icon: ShieldCheckIcon,
     title: 'Traffic & Safety Consultants',
     description: 'We support traffic control layouts, signing & striping, and related civil drafting tasks.',
     accent: 'from-secondary/10 to-secondary/20',
   },
   {
-    icon: HardHat,
+    icon: WrenchScrewdriverIcon,
     title: 'Contractors',
     description: 'Need updated TCPs, staging plans, or as-built drafting during construction? We can help.',
     accent: 'from-secondary/20 via-secondary/15 to-secondary/20',
   },
   {
-    icon: Briefcase,
+    icon: BriefcaseIcon,
     title: 'Developers (via their engineers)',
     description: 'We support the engineering firms serving private developers, by accelerating plan set production and revisions.',
     accent: 'from-secondary/10 to-secondary/20',

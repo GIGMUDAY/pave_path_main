@@ -1,34 +1,68 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Zap, Target, Repeat, Link, GitBranch } from 'lucide-react';
+import {
+  BoltIcon,
+  CheckBadgeIcon,
+  ArrowPathIcon,
+  PuzzlePieceIcon,
+  ArrowsRightLeftIcon,
+} from '@heroicons/react/24/outline';
 
 const reasons = [
   {
-    icon: Zap,
+    icon: BoltIcon,
     title: 'Speed',
     description: '24–48 hr redline updates and fast turnaround on high-priority tasks.',
   },
   {
-    icon: Target,
+    icon: CheckBadgeIcon,
     title: 'Accuracy',
     description: 'Drafting aligned to ADA, PROWAG, MUTCD, and state DOT standards.',
   },
   {
-    icon: Repeat,
+    icon: ArrowPathIcon,
     title: 'Consistency',
     description: 'Structured workflows and QA/QC checks so your sheets look like your own team produced them.',
   },
   {
-    icon: Link,
+    icon: PuzzlePieceIcon,
     title: 'Integration',
     description: 'We use your templates, standards, and naming conventions — working seamlessly in the background.',
   },
   {
-    icon: GitBranch,
+    icon: ArrowsRightLeftIcon,
     title: 'Flexibility',
     description: 'Use us for one-off tasks, recurring drafting, or dedicated Pods.',
   },
 ];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: {
+    opacity: 0,
+    y: 80,
+    scale: 0.85,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+};
 
 export const WhyPavePath = () => {
   const ref = useRef(null);
@@ -54,14 +88,17 @@ export const WhyPavePath = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+        <motion.div
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={containerVariants}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto"
+        >
           {reasons.map((reason, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="p-5 sm:p-6 text-center border border-border/50 dark:border-border/70 rounded-[6px] bg-card"
+              variants={itemVariants}
+              className="glass-card-hover p-5 sm:p-6 text-center border border-border/50 dark:border-border/70 rounded-[6px] bg-card"
             >
               <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-[6px] bg-secondary/10 mb-4 sm:mb-5">
                 <reason.icon className="w-6 h-6 sm:w-7 sm:h-7 text-secondary" strokeWidth={1.5} />
@@ -70,7 +107,7 @@ export const WhyPavePath = () => {
               <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">{reason.description}</p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

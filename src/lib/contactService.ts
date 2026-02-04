@@ -1,6 +1,3 @@
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from './firebase';
-
 export interface CallFormData {
   name: string;
   firm: string;
@@ -19,37 +16,42 @@ export interface RedlineFormData {
   description: string;
 }
 
-/**
- * Save a call request form submission to Firestore
- */
-export const saveCallRequest = async (formData: CallFormData): Promise<void> => {
-  try {
-    await addDoc(collection(db, 'callRequests'), {
-      ...formData,
-      type: 'call',
-      createdAt: serverTimestamp(),
-      status: 'new',
-    });
-  } catch (error) {
-    console.error('Error saving call request:', error);
-    throw error;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+
+const postJson = async (path: string, body: Record<string, unknown>) => {
+  const url = `${API_BASE_URL.replace(/\/$/, '')}${path}`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+
+  if (!res.ok) {
+    const detail = await res.json().catch(() => ({}));
+    const message = (detail as { error?: string; detail?: string }).error || res.statusText || 'Request failed';
+    throw new Error(message);
   }
 };
 
-/**
- * Save a redline task form submission to Firestore
- */
+export const saveCallRequest = async (formData: CallFormData): Promise<void> => {
+  await postJson('/api/contact/call', {
+    name: formData.name,
+    firm: formData.firm,
+    role: formData.role,
+    email: formData.email,
+    phone: formData.phone,
+    draftingSupport: formData.draftingSupport,
+    otherService: formData.otherService,
+    message: formData.message,
+  });
+};
+
 export const saveRedlineRequest = async (formData: RedlineFormData): Promise<void> => {
-  try {
-    await addDoc(collection(db, 'redlineRequests'), {
-      ...formData,
-      type: 'redline',
-      createdAt: serverTimestamp(),
-      status: 'new',
-    });
-  } catch (error) {
-    console.error('Error saving redline request:', error);
-    throw error;
-  }
+  await postJson('/api/contact/redline', {
+    name: formData.name,
+    email: formData.email,
+    deadline: formData.deadline,
+    description: formData.description,
+  });
 };
 

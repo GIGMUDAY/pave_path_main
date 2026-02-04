@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Test Client</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 30px auto; padding: 0 16px; }
+    fieldset { margin-bottom: 16px; }
+    input, textarea, button { margin-top: 6px; padding: 8px; width: 100%; box-sizing: border-box; }
+    textarea { min-height: 120px; }
+    img { max-width: 240px; display: block; margin-top: 8px; }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .row > div { flex: 1; min-width: 260px; }
+    pre { background: #f5f5f5; padding: 10px; overflow-x: auto; }
+    .card { border: 1px solid #ddd; padding: 12px; border-radius: 8px; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  <h1>Admin Test Client</h1>
+  <p>Talks to backend at <strong>http://localhost:8080</strong> (change API_BASE in script if needed).</p>
+
+  <fieldset>
+    <legend>Login / Register</legend>
+    <div class="row">
+      <div>
+        <label>Email <input id="email" type="email" value="berekettadesse1244@gmail.com" /></label>
+      </div>
+      <div>
+        <label>Password <input id="password" type="password" value="12345678" /></label>
+      </div>
+    </div>
+    <div class="row">
+      <div><button id="loginBtn">Login</button></div>
+      <div><button id="registerBtn">Register</button></div>
+      <div><button id="logoutBtn">Logout</button></div>
+    </div>
+    <div>Token: <code id="tokenDisplay">(none)</code></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Create Post</legend>
+    <label>Title <input id="newTitle" type="text" /></label>
+    <label>Content <textarea id="newContent"></textarea></label>
+    <label>Image <input id="newImage" type="file" accept="image/*" /></label>
+    <button id="createBtn">Create</button>
+  </fieldset>
+
+  <fieldset>
+    <legend>Posts</legend>
+    <div id="posts"></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Debug</legend>
+    <pre id="debug">Ready.</pre>
+  </fieldset>
+
+  <script>
+    const API_BASE = 'http://localhost:8080';
+    let token = localStorage.getItem('auth_token') || null;
+    let authEmail = localStorage.getItem('auth_email') || '';
+    updateTokenDisplay();
+
+    function log(msg) {
+      const debug = document.getElementById('debug');
+      debug.textContent = typeof msg === 'string' ? msg : JSON.stringify(msg, null, 2);
+    }
+
+    async function auth(mode) {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const res = await fetch(`${API_BASE}/api/auth/${mode}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const body = await res.json();
+      if (!res.ok) throw body;
+      token = body.token;
+      authEmail = body.user?.email || email;
+      localStorage.setItem('auth_token', token);
+      localStorage.setItem('auth_email', authEmail);
+      updateTokenDisplay();
+      await loadPosts();
+    }
+
+    function updateTokenDisplay() {
+      document.getElementById('tokenDisplay').textContent = token ? `${authEmail || ''} (token set)` : '(none)';
+    }
+
+    async function loadPosts() {
+      const res = await fetch(`${API_BASE}/api/posts`, { headers: token ? { Authorization: `Bearer ${token}` } : {} });
+      const data = await res.json();
+      renderPosts(data);
+    }
+
+    function renderPosts(list) {
+      const container = document.getElementById('posts');
+      container.innerHTML = '';
+      list.forEach((p) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <strong>${p.title}</strong><br/>
+          <em>${p.id}</em><br/>
+          <div>${p.contentHtml?.slice(0, 120) || ''}</div>
+          ${p.imageUrl ? `<img src="${API_BASE}${p.imageUrl}" alt="">` : ''}
+          <div class="row">
+            <div><button data-id="${p.id}" class="edit">Edit (reuse create fields)</button></div>
+            <div><button data-id="${p.id}" class="del">Delete</button></div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      container.querySelectorAll('button.edit').forEach((btn) => {
+        btn.onclick = async () => {
+          const id = btn.getAttribute('data-id');
+          await updatePost(id);
+        };
+      });
+      container.querySelectorAll('button.del').forEach((btn) => {
+        btn.onclick = async () => {
+          const id = btn.getAttribute('data-id');
+          await deletePost(id);
+        };
+      });
+    }
+
+    async function createPost() {
+      const title = document.getElementById('newTitle').value;
+      const contentHtml = document.getElementById('newContent').value;
+      const file = document.getElementById('newImage').files[0];
+      const form = new FormData();
+      form.append('title', title);
+      form.append('contentHtml', contentHtml);
+      if (file) form.append('image', file);
+      const res = await fetch(`${API_BASE}/api/posts`, {
+        method: 'POST',
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        body: form
+      });
+      const body = await res.json();
+      if (!res.ok) throw body;
+      await loadPosts();
+    }
+
+    async function updatePost(id) {
+      const title = document.getElementById('newTitle').value;
+      const contentHtml = document.getElementById('newContent').value;
+      const file = document.getElementById('newImage').files[0];
+      const form = new FormData();
+      form.append('title', title);
+      form.append('contentHtml', contentHtml);
+      if (file) form.append('image', file);
+      const res = await fetch(`${API_BASE}/api/posts/${id}`, {
+        method: 'PUT',
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        body: form
+      });
+      const body = await res.json();
+      if (!res.ok) throw body;
+      await loadPosts();
+    }
+
+    async function deletePost(id) {
+      const res = await fetch(`${API_BASE}/api/posts/${id}`, {
+        method: 'DELETE',
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        throw body || { error: 'Delete failed' };
+      }
+      await loadPosts();
+    }
+
+    document.getElementById('loginBtn').onclick = async () => {
+      try { await auth('login'); log('Logged in'); } catch (e) { log(e); }
+    };
+    document.getElementById('registerBtn').onclick = async () => {
+      try { await auth('register'); log('Registered & logged in'); } catch (e) { log(e); }
+    };
+    document.getElementById('logoutBtn').onclick = () => { token = null; authEmail = ''; localStorage.removeItem('auth_token'); localStorage.removeItem('auth_email'); updateTokenDisplay(); log('Logged out'); };
+    document.getElementById('createBtn').onclick = async () => { try { await createPost(); log('Created'); } catch (e) { log(e); } };
+
+    // Initial load if token exists
+    if (token) {
+      loadPosts().catch(log);
+    }
+  </script>
+</body>
+</html>

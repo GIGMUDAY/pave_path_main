@@ -19,8 +19,10 @@ export const ThemeToggle = () => {
     );
   }
 
+  const currentTheme = theme || "light";
+  
   const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
     setTheme(newTheme);
   };
 
@@ -32,7 +34,7 @@ export const ThemeToggle = () => {
       onClick={toggleTheme}
       aria-label="Toggle theme"
     >
-      {theme === "dark" ? (
+      {currentTheme === "dark" ? (
         <Sun className="h-4 w-4 transition-all" />
       ) : (
         <Moon className="h-4 w-4 transition-all" />

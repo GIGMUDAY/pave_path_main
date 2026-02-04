@@ -1,12 +1,16 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { FileText, ClipboardList, Users, CheckCircle2 } from 'lucide-react';
+import {
+  Cog6ToothIcon,
+  InboxArrowDownIcon,
+  ClipboardDocumentCheckIcon,
+  PaperAirplaneIcon,
+} from '@heroicons/react/24/outline';
 import { StickyScroll } from './StickyScroll';
 
 const steps = [
   {
-    icon: FileText,
-    number: '01',
+    icon: Cog6ToothIcon,
     title: 'Standards & Setup',
     description: 'We start with your CAD standards & templates, sample project sheets, and layer naming conventions.',
     features: [
@@ -26,8 +30,7 @@ const steps = [
     ),
   },
   {
-    icon: ClipboardList,
-    number: '02',
+    icon: InboxArrowDownIcon,
     title: 'Task Intake',
     description: 'You send tasks via email, shared drive, or project management tools.',
     features: [
@@ -48,8 +51,7 @@ const steps = [
     ),
   },
   {
-    icon: Users,
-    number: '03',
+    icon: ClipboardDocumentCheckIcon,
     title: 'Drafting & QA',
     description: 'Our drafting team produces drawings following your standards with internal QA/QC checks.',
     features: [
@@ -69,8 +71,7 @@ const steps = [
     ),
   },
   {
-    icon: CheckCircle2,
-    number: '04',
+    icon: PaperAirplaneIcon,
     title: 'Delivery & Revisions',
     description: 'You receive CAD files and PDFs, with quick revisions to keep your schedule moving.',
     features: [

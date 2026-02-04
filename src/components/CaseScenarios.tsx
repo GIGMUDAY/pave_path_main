@@ -1,25 +1,31 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Building2, Car, HardHat, Map } from 'lucide-react';
+import { Building2 } from 'lucide-react';
+import {
+  ShieldCheckIcon,
+  WrenchScrewdriverIcon,
+  GlobeAltIcon,
+  BuildingOfficeIcon,
+} from '@heroicons/react/24/outline';
 
 const helpCategories = [
   {
-    icon: Building2,
+    icon: BuildingOfficeIcon,
     title: 'Small and mid-size civil engineering firms',
     gradient: 'from-secondary/20 to-secondary/10',
   },
   {
-    icon: Car,
+    icon: ShieldCheckIcon,
     title: 'Transportation & traffic consultancies',
     gradient: 'from-secondary/10 to-secondary/20',
   },
   {
-    icon: HardHat,
+    icon: WrenchScrewdriverIcon,
     title: 'Contractors needing TCP and plan updates',
     gradient: 'from-secondary/20 via-secondary/15 to-secondary/20',
   },
   {
-    icon: Map,
+    icon: GlobeAltIcon,
     title: 'Firms working across multiple states and standards',
     gradient: 'from-secondary/10 to-secondary/20',
   },

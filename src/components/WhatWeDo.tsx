@@ -1,31 +1,38 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { PenTool, Accessibility, Droplets, Car, ClipboardList, Settings } from 'lucide-react';
+import {
+  PencilSquareIcon,
+  ScaleIcon,
+  TruckIcon,
+  BeakerIcon,
+  MapIcon,
+  ClipboardDocumentCheckIcon,
+} from '@heroicons/react/24/outline';
 
 const services = [
   {
-    icon: PenTool,
+    icon: PencilSquareIcon,
     text: 'Civil 3D & AutoCAD drafting',
   },
   {
-    icon: Accessibility,
-    text: 'ADA curb ramp drafting (4–8 sheet packs)',
+    icon: ScaleIcon,
+    text: 'ADA curb ramp drafting (4-8 sheet packs)',
   },
   {
-    icon: Car,
+    icon: TruckIcon,
     text: 'Traffic control plan drafting (MUTCD aligned)',
   },
   {
-    icon: Droplets,
+    icon: BeakerIcon,
     text: 'SWPPP & erosion control drafting',
   },
   {
-    icon: ClipboardList,
+    icon: MapIcon,
     text: 'Signage, striping & utility drafting',
   },
   {
-    icon: Settings,
+    icon: ClipboardDocumentCheckIcon,
     text: 'Plan set cleanup, formatting, and organization',
   },
 ];
@@ -63,11 +70,21 @@ export const WhatWeDo = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className={`col-span-12 md:col-span-6 lg:col-span-4 p-5 sm:p-6 md:p-8 rounded-[6px] border border-border/50 dark:border-border/70 ${
                 index % 2 === 0 ? 'bg-accent/30 dark:bg-accent/15' : 'bg-muted dark:bg-muted/80'
-              }`}
+              } glass-card-hover`}
             >
               <div className="flex flex-col gap-3 sm:gap-4">
-                <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-[6px] bg-secondary/10 flex items-center justify-center">
-                  <service.icon className="w-5 h-5 sm:w-6 sm:h-6 text-secondary" strokeWidth={1.5} />
+                <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-[6px] bg-secondary/10 flex items-center justify-center overflow-hidden">
+                  {service.image ? (
+                    <img
+                      src={service.image}
+                      alt={service.text}
+                      className="w-full h-full object-contain"
+                    />
+                  ) : (
+                    service.icon && (
+                      <service.icon className="w-5 h-5 sm:w-6 sm:h-6 text-secondary" strokeWidth={1.5} />
+                    )
+                  )}
                 </div>
                 <p className="font-display text-base sm:text-lg font-semibold text-foreground leading-relaxed">
                   {service.text}

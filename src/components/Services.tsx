@@ -1,12 +1,19 @@
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import { PenTool, Accessibility, Car, Droplets, ClipboardList, CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, FileCheck, Settings, Upload } from 'lucide-react';
+import {
+  PencilSquareIcon,
+  ScaleIcon,
+  TruckIcon,
+  BeakerIcon,
+  ClipboardDocumentCheckIcon,
+} from '@heroicons/react/24/outline';
 
 const services = [
   {
     id: 'civil-transportation',
     badge: 'Core Service',
-    icon: PenTool,
+    icon: PencilSquareIcon,
     title: 'Civil & Transportation Drafting',
     description: 'We provide CAD drafting services for roadway, site, and transportation projects.',
     bullets: [
@@ -21,7 +28,7 @@ const services = [
   {
     id: 'ada-curb-ramp',
     badge: 'Compliance',
-    icon: Accessibility,
+    icon: ScaleIcon,
     title: 'ADA Curb Ramp Drafting',
     description: 'We specialize in ADA curb ramp drafting for cities, agencies, and consultants.',
     bullets: [
@@ -36,7 +43,7 @@ const services = [
   {
     id: 'traffic-control',
     badge: 'Traffic & Safety',
-    icon: Car,
+    icon: TruckIcon,
     title: 'Traffic Control Plan Drafting (TCP)',
     description: 'We draft MUTCD-compliant traffic control plans for lane closures, detours, utility work, and construction phasing.',
     bullets: [
@@ -59,7 +66,7 @@ const services = [
   {
     id: 'swppp-erosion',
     badge: 'Compliance',
-    icon: Droplets,
+    icon: BeakerIcon,
     title: 'SWPPP & Erosion Control Drafting',
     description: 'We prepare drafting for SWPPP and water pollution control plans from your engineer\'s markups and design criteria.',
     bullets: [
@@ -74,7 +81,7 @@ const services = [
   {
     id: 'plan-cleanup',
     badge: 'Organization',
-    icon: ClipboardList,
+    icon: ClipboardDocumentCheckIcon,
     title: 'Plan Set Cleanup & Organization',
     description: 'We help firms present polished, consistent plan sets that are submission-ready and easy to review.',
     bullets: [
@@ -112,8 +119,8 @@ export const Services = () => {
   };
 
   const cardVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       y: 60,
       scale: 0.95,
     },
@@ -191,20 +198,20 @@ export const Services = () => {
   return (
     <section id="services" className="section-spacing relative bg-accent/20 dark:bg-accent/10" ref={sectionRef}>
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div 
+        <motion.div
           className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={isSectionInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 1.2, delay: 0.3 }}
         />
-        <motion.div 
+        <motion.div
           className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={isSectionInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 1.2, delay: 0.5 }}
         />
       </div>
-      
+
       <div className="section-container relative z-10">
         {/* Header */}
         <motion.div
@@ -214,7 +221,7 @@ export const Services = () => {
           transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           className="text-center mb-16"
         >
-          <motion.span 
+          <motion.span
             className="inline-block text-primary font-medium text-sm uppercase tracking-wider mb-4"
             initial={{ opacity: 0, y: -10 }}
             animate={isSectionInView ? { opacity: 1, y: 0 } : {}}
@@ -222,7 +229,7 @@ export const Services = () => {
           >
             Services
           </motion.span>
-          <motion.h2 
+          <motion.h2
             className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-4 mb-4 sm:mb-6 text-foreground"
             initial={{ opacity: 0, y: 20 }}
             animate={isSectionInView ? { opacity: 1, y: 0 } : {}}
@@ -231,7 +238,7 @@ export const Services = () => {
             Drafting Services for Civil & Transportation Projects
           </motion.h2>
           <div className="max-w-3xl mx-auto space-y-3 sm:space-y-4">
-            <motion.p 
+            <motion.p
               className="text-muted-foreground text-base sm:text-lg leading-relaxed"
               initial={{ opacity: 0, y: 15 }}
               animate={isSectionInView ? { opacity: 1, y: 0 } : {}}
@@ -239,7 +246,7 @@ export const Services = () => {
             >
               PavePath supports civil engineering and transportation teams with production-ready drafting.
             </motion.p>
-            <motion.p 
+            <motion.p
               className="text-foreground text-base sm:text-lg font-semibold"
               initial={{ opacity: 0, y: 15 }}
               animate={isSectionInView ? { opacity: 1, y: 0 } : {}}
@@ -254,19 +261,20 @@ export const Services = () => {
         <div ref={containerRef} className="relative">
           {services.map((service, index) => {
             const isEven = index % 2 === 0;
-            
+
             // Calculate scale for each card - cards scale down as you scroll (works on all devices)
             const targetScale = 1 - ((services.length - index) * 0.05);
             const range: [number, number] = [index * 0.2, 1];
             const scale = useTransform(scrollYProgress, range, [1, targetScale]);
-            
+
             return (
               <div
                 key={service.id}
+                id={service.id}
                 className="h-screen flex items-center justify-center sticky top-0"
               >
                 <motion.div
-                  style={{ 
+                  style={{
                     scale: scale,
                   }}
                   initial={{ opacity: 0, y: 50 }}
@@ -282,20 +290,20 @@ export const Services = () => {
                   className={`glass-card-hover relative overflow-hidden rounded-xl sm:rounded-2xl w-full max-w-7xl mx-auto group flex flex-col dark:border-border/70 ${service.hasTwoSections ? 'min-h-[500px] sm:min-h-[550px] lg:min-h-[600px]' : 'min-h-[400px] sm:min-h-[500px] lg:min-h-[600px]'}`}
                 >
                   {/* Background Gradient Effect */}
-                  <motion.div 
+                  <motion.div
                     className="absolute inset-0 bg-gradient-to-br from-secondary/5 via-secondary/2 to-secondary/5"
                     initial={{ opacity: 0 }}
                     animate={isSectionInView ? { opacity: [0, 0.3, 0] } : {}}
                     transition={{ duration: 1, delay: 0.5 + index * 0.15 }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 via-secondary/2 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
+
                   {/* Content */}
                   <div className={`relative ${service.hasTwoSections ? 'p-3 sm:p-4 md:p-6 lg:p-8' : 'p-4 sm:p-6 lg:p-8'} flex-1 flex flex-col`}>
                     <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-6 sm:gap-8 lg:gap-12 items-start`}>
                       {/* Left/Right: Icon & Badge Section */}
                       <div className={`flex-shrink-0 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
-                        <motion.div 
+                        <motion.div
                           className="space-y-6"
                           initial={{ opacity: 0, scale: 0.8 }}
                           animate={{
@@ -308,7 +316,7 @@ export const Services = () => {
                           }}
                         >
                           {/* Badge */}
-                          <motion.div 
+                          <motion.div
                             className="inline-flex items-center"
                             initial={{ opacity: 0, x: -20 }}
                             animate={{
@@ -324,9 +332,9 @@ export const Services = () => {
                               {service.badge}
                             </span>
                           </motion.div>
-                          
+
                           {/* Icon */}
-                          <motion.div 
+                          <motion.div
                             className={`
                               relative w-16 h-16 lg:w-20 lg:h-20 rounded-xl
                               bg-gradient-to-br ${service.iconGradient}
@@ -355,7 +363,7 @@ export const Services = () => {
                       </div>
 
                       {/* Right/Left: Content Section */}
-                      <motion.div 
+                      <motion.div
                         className={`flex-1 flex flex-col ${isEven ? 'lg:order-2' : 'lg:order-1'}`}
                         initial={{ opacity: 0, x: 20 }}
                         animate={{
@@ -368,7 +376,7 @@ export const Services = () => {
                         }}
                       >
                         {/* Title */}
-                        <motion.h3 
+                        <motion.h3
                           className="font-display text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-foreground mb-3 sm:mb-4 group-hover:text-secondary transition-colors duration-300"
                           initial={{ opacity: 0, y: 20 }}
                           animate={{
@@ -382,9 +390,9 @@ export const Services = () => {
                         >
                           {service.title}
                         </motion.h3>
-                        
+
                         {/* Description */}
-                        <motion.p 
+                        <motion.p
                           className={`text-muted-foreground ${service.hasTwoSections ? 'text-xs sm:text-sm md:text-base lg:text-lg mb-2 sm:mb-3 md:mb-4' : 'text-sm sm:text-base lg:text-lg mb-4 sm:mb-6'} leading-relaxed`}
                           initial={{ opacity: 0 }}
                           animate={{
@@ -400,7 +408,7 @@ export const Services = () => {
 
                         {/* Bullet Points - Special layout for services with two sections */}
                         {service.hasTwoSections ? (
-                          <motion.div 
+                          <motion.div
                             className="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-4 md:gap-6 mb-3 sm:mb-4 md:mb-6"
                             initial={{ opacity: 0 }}
                             animate={{
@@ -412,7 +420,7 @@ export const Services = () => {
                             }}
                           >
                             {/* First Section */}
-                            <motion.div 
+                            <motion.div
                               className="p-2.5 sm:p-3 md:p-4 rounded-lg bg-primary/5 dark:bg-primary/10 border border-primary/10 dark:border-primary/20"
                               initial={{ opacity: 0, x: -20 }}
                               animate={{
@@ -450,7 +458,7 @@ export const Services = () => {
                             </motion.div>
 
                             {/* Second Section */}
-                            <motion.div 
+                            <motion.div
                               className="p-2.5 sm:p-3 md:p-4 rounded-lg bg-accent/5 dark:bg-accent/10 border border-accent/10 dark:border-accent/20"
                               initial={{ opacity: 0, x: 20 }}
                               animate={{
@@ -488,7 +496,7 @@ export const Services = () => {
                             </motion.div>
                           </motion.div>
                         ) : (
-                          <motion.ul 
+                          <motion.ul
                             className="space-y-1.5 sm:space-y-2 mb-4 sm:mb-6"
                             initial={{ opacity: 0 }}
                             animate={{
@@ -521,7 +529,7 @@ export const Services = () => {
                         )}
 
                         {/* Best For Section */}
-                        <motion.div 
+                        <motion.div
                           className={`mt-auto ${service.hasTwoSections ? 'mb-2 sm:mb-3 md:mb-6 p-2 sm:p-2.5 md:p-4' : 'mb-4 sm:mb-6 p-3 sm:p-4'} rounded-lg bg-primary/5 dark:bg-primary/10 border border-primary/10 dark:border-primary/20`}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{

@@ -1,48 +1,36 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Calendar, ArrowRight, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
-// Sample blog posts - in production, this would come from a CMS or API
-const blogPosts = [
-  {
-    id: 1,
-    slug: 'how-overflow-drafting-helps-civil-firms-meet-deadlines',
-    title: 'How Overflow Drafting Helps Civil Engineering Firms Meet Tight Deadlines',
-    excerpt: 'Discover how overflow drafting support helps civil engineering firms stay ahead of deadlines, reduce backlog, and maintain production quality during peak workload cycles.',
-    author: 'PavePath Team',
-    date: '2024-01-15',
-    readTime: '5 min read',
-    category: 'Drafting Tips',
-    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=600&fit=crop&q=80',
-  },
-  {
-    id: 2,
-    slug: 'ada-curb-ramp-drafting-best-practices',
-    title: 'ADA Curb Ramp Drafting: Best Practices for Compliance and Accuracy',
-    excerpt: 'Learn best practices for ADA-compliant curb ramp drafting, including slope geometry, sheet standards, PROWAG rules, and drafting techniques for accurate ramp plan sets.',
-    author: 'PavePath Team',
-    date: '2024-01-10',
-    readTime: '7 min read',
-    category: 'Compliance',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&q=80',
-  },
-  {
-    id: 3,
-    slug: 'how-to-prepare-permit-ready-traffic-control-plan-set',
-    title: 'How to Prepare a Permit-Ready Traffic Control Plan Set',
-    excerpt: 'Learn the essential steps and drafting standards needed to prepare a MUTCD-compliant traffic control plan (TCP) ready for agency permitting.',
-    author: 'PavePath Team',
-    date: '2024-01-05',
-    readTime: '6 min read',
-    category: 'Traffic Engineering',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop&q=80',
-  },
-];
+import { BlogPost, fetchPosts } from '@/utils/posts';
 
 export const Blog = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetchPosts()
+      .then((data) => {
+        if (!isMounted) return;
+        setPosts(data.slice(0, 3));
+      })
+      .catch((err) => {
+        if (!isMounted) return;
+        console.error(err);
+        setError('Unable to load posts right now.');
+      })
+      .finally(() => {
+        if (isMounted) setLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -68,7 +56,13 @@ export const Blog = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto mb-8">
-          {blogPosts.map((post, index) => (
+          {loading && (
+            <p className="text-muted-foreground text-center col-span-full">Loading posts...</p>
+          )}
+          {error && !loading && (
+            <p className="text-sm text-red-500 text-center col-span-full">{error}</p>
+          )}
+          {!loading && !error && posts.map((post, index) => (
             <motion.div
               key={post.id}
               initial={{ opacity: 0, y: 30 }}
@@ -78,13 +72,18 @@ export const Blog = () => {
             >
               <Link to={`/blog/${post.slug}`} className="block h-full">
                 <div className="bg-card border border-border dark:border-border/70 rounded-2xl overflow-hidden shadow-card hover:shadow-hover transition-all duration-300 h-full flex flex-col">
-                  {/* Image */}
                   <div className="relative h-48 overflow-hidden">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
+                    {post.image ? (
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-muted flex items-center justify-center text-sm text-muted-foreground">
+                        No image
+                      </div>
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                     <div className="absolute top-4 left-4">
                       <span className="text-xs font-semibold uppercase tracking-wider text-secondary-foreground bg-secondary px-3 py-1 rounded-full">
@@ -93,7 +92,6 @@ export const Blog = () => {
                     </div>
                   </div>
 
-                  {/* Content */}
                   <div className="p-6 flex-1 flex flex-col">
                     <h3 className="font-display text-xl lg:text-2xl font-semibold text-foreground mb-3 group-hover:text-secondary transition-colors line-clamp-2">
                       {post.title}
@@ -102,7 +100,6 @@ export const Blog = () => {
                       {post.excerpt}
                     </p>
 
-                    {/* Meta Info */}
                     <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
                       <div className="flex items-center gap-1.5">
                         <Calendar className="w-3.5 h-3.5" />
@@ -114,7 +111,6 @@ export const Blog = () => {
                       </div>
                     </div>
 
-                    {/* Read More */}
                     <div className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-secondary transition-colors group/link">
                       <span>Read article</span>
                       <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
@@ -124,6 +120,9 @@ export const Blog = () => {
               </Link>
             </motion.div>
           ))}
+          {!loading && !error && posts.length === 0 && (
+            <p className="text-muted-foreground text-center col-span-full">No posts published yet.</p>
+          )}
         </div>
 
         {/* View All Link */}
